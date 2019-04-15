@@ -1,6 +1,17 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Button, Paper, InputBase, IconButton } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
+import {
+	AppBar,
+	Toolbar,
+	Typography,
+	Button,
+	Paper,
+	InputBase,
+	IconButton,
+	Badge,
+	Menu,
+	MenuItem
+} from '@material-ui/core';
+import { Search, Notifications } from '@material-ui/icons';
 import UserAvatar from 'react-user-avatar';
 
 const style = {
@@ -28,28 +39,43 @@ const style = {
 	avatar: {
 		flex: 1,
 		alignItems: 'center',
-		justifyContents: 'center'
+		justifyContents: 'center',
+		marginLeft: 20
 	}
 };
 
-export default (props) => (
-	<div>
-		<AppBar position="static" color="default" style={{ elevation: 0 }}>
-			<Toolbar style={style.header}>
-				<Typography variant="h6" color="inherit" style={style.logo}>
-					KIOSK
-				</Typography>
-				<Paper style={style.root} elevation={1}>
-					<InputBase style={style.input} placeholder="Search for some awesome Events and Programmes!!" />
-					<IconButton style={style.iconButton} aria-label="Search">
-						<SearchIcon />
-					</IconButton>
-				</Paper>
-				<UserAvatar size="48" name="Kiran Pradhan" src="" style={style.avatar} />
-			</Toolbar>
-		</AppBar>
-	</div>
-);
+class Header extends React.Component {
+	render() {
+		return (
+			<div>
+				<AppBar position="static" color="default" style={{ elevation: 0 }}>
+					<Toolbar style={style.header}>
+						<Typography variant="h6" color="inherit" style={style.logo}>
+							KIOSK
+						</Typography>
+						<Paper style={style.root} elevation={1}>
+							<InputBase
+								style={style.input}
+								placeholder="Search for some awesome Events and Programmes!!"
+							/>
+							<IconButton style={style.iconButton} aria-label="Search">
+								<Search />
+							</IconButton>
+						</Paper>
+						<IconButton>
+							<Badge badgeContent={40} color="secondary" max={99}>
+								<Notifications />
+							</Badge>
+						</IconButton>
+						<UserAvatar size="48" name="Kiran Pradhan" src="" style={style.avatar} />
+					</Toolbar>
+				</AppBar>
+			</div>
+		);
+	}
+}
+
+export default Header;
 // <Button variant="contained" onClick={() => console.log('Clickeds')}>
 // 					{' '}
 // 					Hello

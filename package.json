@@ -17,9 +17,16 @@
 	"config": {
 		"forge": {
 			"make_targets": {
-				"win32": [ "squirrel" ],
-				"darwin": [ "zip" ],
-				"linux": [ "deb", "rpm" ]
+				"win32": [
+					"squirrel"
+				],
+				"darwin": [
+					"zip"
+				],
+				"linux": [
+					"deb",
+					"rpm"
+				]
 			},
 			"electronPackagerConfig": {
 				"packageManager": "yarn"
@@ -45,14 +52,14 @@
 		"electron-compile": "^6.4.4",
 		"electron-devtools-installer": "^2.1.0",
 		"electron-squirrel-startup": "^1.0.0",
+		"flickity": "^2.2.0",
+		"nuka-carousel": "^4.5.3",
 		"react": "^16.3.0",
 		"react-dom": "^16.3.0",
 		"react-hot-loader": "^3.0.0-beta.6",
-		"react-slick": "^0.23.2",
 		"react-user-avatar": "^1.10.0",
 		"semantic-ui-css": "^2.4.1",
-		"semantic-ui-react": "^0.86.0",
-		"slick-carousel": "^1.8.1"
+		"semantic-ui-react": "^0.86.0"
 	},
 	"devDependencies": {
 		"babel-plugin-transform-async-to-generator": "^6.24.1",
