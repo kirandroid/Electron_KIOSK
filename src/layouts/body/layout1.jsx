@@ -1,35 +1,51 @@
 import { Grid, Paper } from '@material-ui/core';
 import Item from './Item';
 import React, { Component } from 'react';
-import Carousel from 'nuka-carousel';
+import Flickity from 'react-flickity-component';
 
 export default class layout1 extends Component {
 	render() {
 		return (
 			<div>
-				<Carousel autoplay={true} dragging={false} swiping={false} withoutControls={false}>
+				<Flickity
+					elementType={'div'} // default 'div'
+					options={{
+						initialIndex: 2,
+						freeScroll: true,
+						contain: true,
+						prevNextButtons: false,
+						pageDots: false,
+						autoPlay: true
+					}} // takes flickity options {}
+					disableImagesLoaded={false} // default false
+					reloadOnUpdate // default false
+				>
 					<img src="https://picsum.photos/1000/300/?image=1080" />
 					<img src="https://picsum.photos/1000/300/?image=1075" />
 					<img src="https://picsum.photos/1000/300/?image=1072" />
-					<img src="https://picsum.photos/1000/300/?image=1063" />
-					<img src="https://picsum.photos/1000/300/?image=1043" />
-					<img src="https://picsum.photos/1000/300/?image=1040" />
-				</Carousel>
-				<div style={{ flexGrow: 1 }}>
-					<Grid container>
-						<Grid item xs={3}>
-							<Item Text="Left" />
-						</Grid>
-						<Grid item xs={3}>
-							<Item Text="Right" />
-						</Grid>
-						<Grid item xs={3}>
-							<Item Text="Right" />
-						</Grid>
-						<Grid item xs={3}>
-							<Item Text="Right" />
-						</Grid>
-					</Grid>
+				</Flickity>
+				<div style={{ padding: 10 }}>
+					<Flickity
+						elementType={'div'} // default 'div'
+						options={{
+							initialIndex: 2,
+							freeScroll: true,
+							contain: true,
+							prevNextButtons: false,
+							pageDots: false,
+							autoPlay: true
+						}} // takes flickity options {}
+						disableImagesLoaded={false} // default false
+						reloadOnUpdate // default false
+					>
+						<Item Text="Left" />
+						<Item Text="Right" />
+						<Item Text="Right" />
+						<Item Text="Right" />
+						<Item Text="Right" />
+						<Item Text="Right" />
+						<Item Text="Right" />
+					</Flickity>
 				</div>
 			</div>
 		);

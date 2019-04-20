@@ -8,6 +8,7 @@ export default ({ Text }) => (
 			padding: 20,
 			margin: 10,
 			height: 70,
+			width: '20%',
 			background: gradient[Math.floor(Math.random() * gradient.length)],
 			textAlign: 'center'
 		}}
