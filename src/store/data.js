@@ -3,71 +3,40 @@ export const tabs = ["Home", "Events", "Study", "College"];
 export const events = [
   {
     title: "Hello",
-    image: "https://picsum.photos/200",
+    image:
+      "https://patancollege.edu.np/wp-content/uploads/2018/03/bscitcoursepic2-570x360.jpg",
     content: "sdjnflkdjsflkjsdlkf"
   },
   {
     title: "Noice",
-    image: "https://picsum.photos/200",
+    image:
+      "https://patancollege.edu.np/wp-content/uploads/2018/03/bscitcoursepic-570x360.jpg",
     content: "sdjnflkdjsflkjsdlkf"
   },
   {
     title: "YESSSS",
-    image: "https://picsum.photos/200",
+    image:
+      "https://patancollege.edu.np/wp-content/uploads/2018/03/bbmcoursepic2-570x360.jpg",
     content: "sdjnflkdjsflkjsdlkf"
   },
   {
     title: "Noice",
-    image: "https://picsum.photos/200",
-    content: "sdjnflkdjsflkjsdlkf"
-  },
-  ,
-  {
-    title: "Noice",
-    image: "https://picsum.photos/200",
+    image: "https://patancollege.edu.np/wp-content/uploads/2018/12/sd.png",
     content: "sdjnflkdjsflkjsdlkf"
   },
   ,
   {
     title: "Noice",
-    image: "https://picsum.photos/200",
+    image:
+      "https://patancollege.edu.np/wp-content/uploads/2019/02/saraswati-puja-00001.jpg",
     content: "sdjnflkdjsflkjsdlkf"
   },
   ,
   {
-    title: "Noice",
-    image: "https://picsum.photos/200",
-    content: "sdjnflkdjsflkjsdlkf"
-  },
-  ,
-  {
-    title: "Noice",
-    image: "https://picsum.photos/200",
-    content: "sdjnflkdjsflkjsdlkf"
-  },
-  ,
-  {
-    title: "Noice",
-    image: "https://picsum.photos/200",
-    content: "sdjnflkdjsflkjsdlkf"
-  },
-  ,
-  {
-    title: "Noice",
-    image: "https://picsum.photos/200",
-    content: "sdjnflkdjsflkjsdlkf"
-  },
-  ,
-  {
-    title: "Noice",
-    image: "https://picsum.photos/200",
-    content: "sdjnflkdjsflkjsdlkf"
-  },
-  ,
-  {
-    title: "Noice",
-    image: "https://picsum.photos/200",
-    content: "sdjnflkdjsflkjsdlkf"
+    title: "BOkas",
+    image:
+      "https://patancollege.edu.np/wp-content/uploads/2018/03/27993829_1299924146818701_6740429578492329228_o.jpg",
+    content: "They are bokas"
   }
 ];
 

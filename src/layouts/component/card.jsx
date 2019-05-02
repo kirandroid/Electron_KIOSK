@@ -8,6 +8,9 @@ import {
   Button,
   Typography
 } from "@material-ui/core";
+import { People } from "@material-ui/icons";
+import AuthModal from "../component/authModal";
+import { Header, Image, Modal } from "semantic-ui-react";
 
 export default class EventCard extends React.Component {
   render() {
@@ -23,11 +26,17 @@ export default class EventCard extends React.Component {
           </CardContent>
         </CardActionArea>
         <CardActions>
+          {/* To call a Signup Modal when clicked semantic needs to pass a trigger, so here the trigger is the button */}
+          <AuthModal
+            trigger={
+              <Button size="small" color="primary">
+                Book
+              </Button>
+            }
+          />
           <Button size="small" color="primary">
-            Hello
-          </Button>
-          <Button size="small" color="primary">
-            Bye
+            <People />
+            12 Seat Left!
           </Button>
         </CardActions>
       </Card>

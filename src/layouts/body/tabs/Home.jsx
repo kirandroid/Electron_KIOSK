@@ -14,7 +14,7 @@ export default class Home extends Component {
               options={{
                 initialIndex: 2,
                 freeScroll: false,
-                contain: false,
+                contain: true,
                 prevNextButtons: false,
                 pageDots: false,
                 autoPlay: true
