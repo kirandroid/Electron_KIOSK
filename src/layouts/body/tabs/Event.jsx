@@ -1,27 +1,46 @@
-import { Grid, Paper } from "@material-ui/core";
-import Item from "../../component/Item";
-import React, { Component } from "react";
-import Flickity from "react-flickity-component";
-import EventCard from "../../component/card";
-import { events } from "../../../store/data";
+import { Grid, Paper, CircularProgress } from '@material-ui/core';
+import Item from '../../component/Item';
+import React, { Component } from 'react';
+import Flickity from 'react-flickity-component';
+import EventCard from '../../component/card';
+import { events } from '../../../store/data';
+import axios from 'axios';
 
 export default class Event extends Component {
-  render() {
-    return (
-      // <Grid container spacing={12} direction={"column"}>
-      <div style={{ flexGrow: 1, padding: 10 }}>
-        <Grid container>
-          {events.map(event => (
-            <Grid item xs={3} style={{ padding: 5 }}>
-              <EventCard
-                title={event.title}
-                image={event.image}
-                content={event.content}
-              />
-            </Grid>
-          ))}
-        </Grid>
-      </div>
-    );
-  }
+	constructor(props) {
+		super(props);
+		this.state = {
+			photos: [],
+			loading: true
+		};
+	}
+
+	componentDidMount() {
+		axios.get(`https://jsonplaceholder.typicode.com/photos`).then((res) => {
+			const photos = res.data;
+			console.log(res.data);
+			this.setState({ photos, loading: false });
+		});
+	}
+	render() {
+		return (
+			<div>
+				{this.state.loading ? (
+					<div style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
+						<CircularProgress color="secondary" style={{ margin: '50' }} />
+					</div>
+				) : (
+					<div style={{ flexGrow: 1, padding: 10 }}>
+						<Grid container>
+							{this.state.photos.slice(0, 15).map((event) => (
+								<Grid item xs={3} style={{ padding: 5 }} key={event.id}>
+									<EventCard title={'sd'} image={event.thumbnailUrl} content={event.title} />
+								</Grid>
+							))}
+						</Grid>
+					</div>
+				)}
+			</div>
+		);
+	}
 }
