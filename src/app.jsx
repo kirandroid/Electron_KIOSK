@@ -21,7 +21,12 @@ export default class App extends React.Component {
       },
       { menuItem: "Event", render: () => <Event /> },
       { menuItem: "Bookings", render: () => <Tab.Pane>Study SCREEN</Tab.Pane> },
-      { menuItem: "User", render: () => <Tab.Pane>Profile SCREEN</Tab.Pane> }
+      { menuItem: "User", render: () => <Tab.Pane>Profile SCREEN</Tab.Pane> },
+      {
+        menuItem: "DashBoard",
+        render: () => <Tab.Pane>Profile SCREEN</Tab.Pane>
+      },
+      { menuItem: "Delete", render: () => <Tab.Pane>Profile SCREEN</Tab.Pane> }
     ];
 
     const user = [
