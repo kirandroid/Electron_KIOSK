@@ -2,12 +2,14 @@ import { Grid, Paper } from "@material-ui/core";
 import Item from "../../component/Item";
 import React, { Component } from "react";
 import Flickity from "react-flickity-component";
+import EventDetailModal from "../../component/eventDetailModal";
+import { gradient } from "../../../store/data";
 
 export default class Home extends Component {
   render() {
     return (
       <div>
-        <Grid container spacing={12} direction={"column"}>
+        <Grid container spacing={8} direction={"column"}>
           <Grid item xs={12}>
             <Flickity
               elementType={"div"} // default 'div'
@@ -17,7 +19,8 @@ export default class Home extends Component {
                 contain: true,
                 prevNextButtons: false,
                 pageDots: false,
-                autoPlay: true
+                autoPlay: true,
+                wrapAround: true
               }} // takes flickity options {}
               disableImagesLoaded={false} // default false
               reloadOnUpdate // default false
@@ -42,7 +45,24 @@ export default class Home extends Component {
                 disableImagesLoaded={false} // default false
                 reloadOnUpdate // default false
               >
-                <Item Text="Left" />
+                <EventDetailModal
+                  trigger={
+                    <Paper
+                      style={{
+                        padding: 40,
+                        margin: 10,
+                        height: 70,
+                        width: "20%",
+                        background:
+                          gradient[Math.floor(Math.random() * gradient.length)],
+                        textAlign: "center"
+                      }}
+                    >
+                      "Left"
+                    </Paper>
+                  }
+                />
+
                 <Item Text="Right" />
                 <Item Text="Right" />
                 <Item Text="Right" />

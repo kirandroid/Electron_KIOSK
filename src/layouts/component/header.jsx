@@ -13,6 +13,7 @@ import {
 } from "@material-ui/core";
 import { Search, Notifications } from "@material-ui/icons";
 import UserAvatar from "react-user-avatar";
+import { Dropdown, Image } from "semantic-ui-react";
 
 const style = {
   header: {
@@ -46,6 +47,12 @@ const style = {
 
 class Header extends React.Component {
   render() {
+    const options = [
+      { key: "user", text: "Account", icon: "user" },
+      { key: "settings", text: "Settings", icon: "settings" },
+      { key: "sign-out", text: "Sign Out", icon: "sign out" }
+    ];
+
     return (
       <div>
         <AppBar position="static" color="default" style={{ elevation: 0 }}>
@@ -67,11 +74,18 @@ class Header extends React.Component {
                 <Notifications />
               </Badge>
             </IconButton>
-            <UserAvatar
-              size="48"
-              name="Kiran Pradhan"
-              src=""
-              style={style.avatar}
+            <Dropdown
+              trigger={
+                <UserAvatar
+                  size="48"
+                  name="Kiran Pradhan"
+                  src=""
+                  style={style.avatar}
+                />
+              }
+              options={options}
+              pointing="top right"
+              icon={null}
             />
           </Toolbar>
         </AppBar>
