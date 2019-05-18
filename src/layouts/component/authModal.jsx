@@ -9,7 +9,7 @@ import {
   Form,
   Button
 } from "semantic-ui-react";
-import { TextField } from "@material-ui/core";
+import { TextField, Typography } from "@material-ui/core";
 import axios from "axios";
 
 export default class AuthModal extends React.Component {
@@ -47,6 +47,9 @@ export default class AuthModal extends React.Component {
 
                 <Grid.Row verticalAlign="middle">
                   <Grid.Column>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Sign In
+                    </Typography>
                     <Form>
                       <Form.Input
                         icon="user"
@@ -93,6 +96,41 @@ export default class AuthModal extends React.Component {
                   </Grid.Column>
 
                   <Grid.Column>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      Sign Up
+                    </Typography>
+                    <Grid columns={2}>
+                      <Grid.Column>
+                        <TextField
+                          id="outlined-password-input"
+                          label="First Name"
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </Grid.Column>
+
+                      <Grid.Column>
+                        <TextField
+                          id="outlined-password-input"
+                          label="Last Name"
+                          margin="normal"
+                          variant="outlined"
+                        />
+                      </Grid.Column>
+                    </Grid>
+
+                    <TextField
+                      id="outlined-password-input"
+                      label="Email"
+                      margin="normal"
+                      variant="outlined"
+                    />
+                    <TextField
+                      id="outlined-password-input"
+                      label="Username"
+                      margin="normal"
+                      variant="outlined"
+                    />
                     <TextField
                       id="outlined-password-input"
                       label="Password"

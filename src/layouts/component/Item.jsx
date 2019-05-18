@@ -2,7 +2,7 @@ import React from "react";
 import { Paper } from "@material-ui/core";
 import { gradient } from "../../store/data";
 
-export default ({ Text }) => (
+export default ({ Text, onClick }) => (
   <Paper
     style={{
       padding: 40,
@@ -12,6 +12,7 @@ export default ({ Text }) => (
       background: gradient[Math.floor(Math.random() * gradient.length)],
       textAlign: "center"
     }}
+    onClick={onClick}
   >
     {Text}
   </Paper>

@@ -16,7 +16,7 @@ import axios from "axios";
 export default class EventDetailModal extends React.Component {
   render() {
     return (
-      <Modal trigger={this.props.trigger}>
+      <Modal trigger={this.props.trigger} dimmer={"blurring"}>
         <Modal.Header>Profile Picture</Modal.Header>
         <Modal.Content image>
           <Image
@@ -25,7 +25,7 @@ export default class EventDetailModal extends React.Component {
             src="https://react.semantic-ui.com/images/wireframe/image.png"
           />
           <Modal.Description>
-            <Header>Modal Header</Header>
+            <Header>{this.props.eventName}</Header>
             <p>
               This is an example of expanded content that will cause the modal's
               dimmer to scroll

@@ -1,4 +1,57 @@
-export const tabs = ["Home", "Events", "Study", "College"];
+export const users = [
+  {
+    ID: 1,
+    FIRST_NAME: "sdds",
+    LAST_NAME: "Pradhan",
+    USERNAME: "kirandroid",
+    PASSWORD: "kiran123",
+    EMAIL: "Kiran@gmail.com",
+    IMAGE_URL:
+      "https://patancollege.edu.np/wp-content/uploads/2018/03/27993829_1299924146818701_6740429578492329228_o.jpg",
+    CREATED_AT: "1526573508",
+    UPDATED_AT: 1526573508,
+    STUDENT_ID: 123456789
+  },
+  {
+    ID: 1,
+    FIRST_NAME: "Kiran",
+    LAST_NAME: "Pradhan",
+    USERNAME: "kirandroid",
+    PASSWORD: "kiran123",
+    EMAIL: "Kiran@gmail.com",
+    IMAGE_URL:
+      "https://patancollege.edu.np/wp-content/uploads/2018/03/bscitcoursepic2-570x360.jpg",
+    CREATED_AT: "1526573508",
+    UPDATED_AT: 1550880000,
+    STUDENT_ID: 123456789
+  },
+  {
+    ID: 1,
+    FIRST_NAME: "Kiran",
+    LAST_NAME: "Pradhan",
+    USERNAME: "kirandroid",
+    PASSWORD: "kiran123",
+    EMAIL: "Kiran@gmail.com",
+    IMAGE_URL:
+      "https://patancollege.edu.np/wp-content/uploads/2018/03/bscitcoursepic2-570x360.jpg",
+    CREATED_AT: "1526573508",
+    UPDATED_AT: 1550880000,
+    STUDENT_ID: 123456789
+  },
+  {
+    ID: 1,
+    FIRST_NAME: "Kiran",
+    LAST_NAME: "Pradhan",
+    USERNAME: "kirandroid",
+    PASSWORD: "kiran123",
+    EMAIL: "Kiran@gmail.com",
+    IMAGE_URL:
+      "https://patancollege.edu.np/wp-content/uploads/2018/03/bscitcoursepic2-570x360.jpg",
+    CREATED_AT: 1550880000,
+    UPDATED_AT: 1550880000,
+    STUDENT_ID: 123456789
+  }
+];
 
 export const events = [
   {
