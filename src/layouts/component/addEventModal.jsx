@@ -4,6 +4,7 @@ import { TextField, Typography, FormControl, MenuItem, Select, OutlinedInput, In
 import axios from 'axios';
 import Pouchdb from 'pouchdb-browser';
 var userdb = new Pouchdb('user');
+import { apiurl } from '../../store/data';
 
 export default class AddEventModal extends React.Component {
 	constructor(props) {
@@ -103,11 +104,11 @@ export default class AddEventModal extends React.Component {
 										</Grid.Column>
 
 										<Button
-											content="Login"
+											content="Add Event"
 											primary
 											onClick={() => {
 												axios
-													.post('http://localhost:4000/api/register', {
+													.post(apiurl + '/api/addevent', {
 														FIRST_NAME: this.state.firstname,
 														LAST_NAME: this.state.lastname,
 														USERNAME: this.state.username,

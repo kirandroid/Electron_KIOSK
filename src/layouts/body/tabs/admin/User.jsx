@@ -3,6 +3,7 @@ import axios from 'axios';
 // import { users } from "../../../../store/data";
 import UserCard from '../../../component/userCard';
 import { Grid, Paper, CircularProgress } from '@material-ui/core';
+import { apiurl } from '../../../../store/data';
 
 export default class User extends Component {
 	constructor(props) {
@@ -13,7 +14,7 @@ export default class User extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('http://localhost:4000/api/users').then((res) => {
+		axios.get(apiurl + '/api/users').then((res) => {
 			const users = res.data;
 			this.setState({ users });
 		});

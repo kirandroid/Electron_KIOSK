@@ -18,14 +18,9 @@ import {
 } from '@material-ui/core';
 import axios from 'axios';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
-
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Pouchdb from 'pouchdb-browser';
 var userdb = new Pouchdb('user');
+import { apiurl } from '../../store/data';
 
 export default class AuthModal extends React.Component {
 	constructor(props) {
@@ -68,27 +63,6 @@ export default class AuthModal extends React.Component {
 	render() {
 		return (
 			<div>
-				<Dialog
-					open={this.state.open}
-					onClose={this.setState({ open: false })}
-					aria-labelledby="alert-dialog-title"
-					aria-describedby="alert-dialog-description"
-				>
-					<DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
-					<DialogContent>
-						<DialogContentText id="alert-dialog-description">
-							Let Google help apps determine location. This means sending anonymous location data to
-							Google, even when no apps are running.
-						</DialogContentText>
-					</DialogContent>
-					<DialogActions>
-						<Button onClick={this.setState({ open: false })}>Disagree</Button>
-						<Button onClick={this.setState({ open: false })} autoFocus>
-							Agree
-						</Button>
-					</DialogActions>
-				</Dialog>
-
 				<Modal trigger={this.props.trigger}>
 					<Modal.Content>
 						<Modal.Description>
@@ -129,7 +103,7 @@ export default class AuthModal extends React.Component {
 													primary
 													onClick={() => {
 														axios
-															.post('http://localhost:4000/api/login', {
+															.post(apiurl + '/api/login', {
 																USERNAME: this.state.username,
 																PASSWORD: this.state.password
 															})
@@ -361,7 +335,7 @@ export default class AuthModal extends React.Component {
 													primary
 													onClick={() => {
 														axios
-															.post('http://localhost:4000/api/register', {
+															.post(apiurl + '/api/register', {
 																FIRST_NAME: this.state.firstname,
 																LAST_NAME: this.state.lastname,
 																USERNAME: this.state.username,
@@ -378,7 +352,6 @@ export default class AuthModal extends React.Component {
 															})
 															.then((response) => {
 																console.log(response);
-																this.setState({ open: true });
 															})
 															.catch((error) => {
 																console.log(error);

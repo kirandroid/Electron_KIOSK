@@ -7,6 +7,7 @@ import EventCard from '../../component/eventCard';
 // import { events } from '../../../store/data';
 import axios from 'axios';
 import AddEventModal from '../../component/addEventModal';
+import { apiurl } from '../../../store/data';
 
 export default class Event extends Component {
 	constructor(props) {
@@ -18,7 +19,7 @@ export default class Event extends Component {
 	}
 
 	componentDidMount() {
-		axios.get(`http://localhost:4000/api/events`).then((res) => {
+		axios.get(apiurl + `/api/events`).then((res) => {
 			const events = res.data;
 			console.log(res.data);
 			this.setState({ events, loading: false });
