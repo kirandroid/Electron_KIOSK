@@ -6,14 +6,40 @@ import Event from './layouts/body/tabs/Event';
 import User from './layouts/body/tabs/admin/User';
 // import { tabs } from "../src/store/data";
 import { Button, Tab } from 'semantic-ui-react';
-import card from './layouts/component/card';
-import { truncateSync } from 'fs';
+import Pouchdb from 'pouchdb-browser';
+var userdb = Pouchdb('user');
 
 export default class App extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { adminUser: true };
+		this.state = {
+			adminUser: true,
+			role: 'Guest',
+			fullname: 'Guest',
+			profilePic: ''
+		};
+		this.fetchfromlocal();
 	}
+
+	fetchfromlocal() {
+		userdb
+			.get('user')
+			.then((doc) => {
+				console.log('"' + doc.FIRST_NAME + ' ' + doc.LAST_NAME + '"');
+				console.log((doc.FIRST_NAME + ' ' + doc.LAST_NAME).toString());
+				console.log(`${doc.FIRST_NAME} ${doc.LAST_NAME}`);
+
+				this.setState({
+					role: doc.ROLE,
+					fullname: (doc.FIRST_NAME + ' ' + doc.LAST_NAME).toString(),
+					profilePic: doc.IMAGE_URL
+				});
+			})
+			.catch(function(err) {
+				console.log(err);
+			});
+	}
+
 	render() {
 		const adminPanes = [
 			{
@@ -38,7 +64,7 @@ export default class App extends React.Component {
 
 		return (
 			<div>
-				<Header />
+				<Header fullname={this.state.fullname} profilePic={this.state.profilePic} />
 				<Tab panes={this.state.adminUser ? adminPanes : user} />
 			</div>
 		);
