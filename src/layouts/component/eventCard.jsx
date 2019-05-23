@@ -44,6 +44,7 @@ export default class EventCard extends React.Component {
 				<CardActions>
 					{/* To call a Signup Modal when clicked semantic needs to pass a trigger, so here the trigger is the button */}
 					<AuthModal
+						openModal={true}
 						trigger={
 							<Button size="small" color="primary">
 								Book

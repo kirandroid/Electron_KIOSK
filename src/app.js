@@ -14,10 +14,13 @@ export default class App extends React.Component {
 		super(props);
 		this.state = {
 			adminUser: true,
-			role: 'Guest',
-			fullname: 'Guest',
+			role: '',
+			fullname: 'Guest User',
 			profilePic: ''
 		};
+	}
+
+	componentWillMount() {
 		this.fetchfromlocal();
 	}
 
@@ -25,18 +28,24 @@ export default class App extends React.Component {
 		userdb
 			.get('user')
 			.then((doc) => {
-				console.log('"' + doc.FIRST_NAME + ' ' + doc.LAST_NAME + '"');
-				console.log((doc.FIRST_NAME + ' ' + doc.LAST_NAME).toString());
-				console.log(`${doc.FIRST_NAME} ${doc.LAST_NAME}`);
-
 				this.setState({
 					role: doc.ROLE,
 					fullname: (doc.FIRST_NAME + ' ' + doc.LAST_NAME).toString(),
 					profilePic: doc.IMAGE_URL
 				});
 			})
-			.catch(function(err) {
-				console.log(err);
+			.catch((err) => {
+				if (err.name === 'not_found') {
+					console.log(err);
+					this.setState({
+						role: 'Guest',
+						fullname: 'Guest User',
+						profilePic:
+							'http://greenwings.co/wp-content/uploads/2018/09/blank-head-profile-pic-for-a-man.jpg'
+					});
+				} else {
+					console.log(err);
+				}
 			});
 	}
 
@@ -62,10 +71,30 @@ export default class App extends React.Component {
 			{ menuItem: 'Profile', render: () => <Tab.Pane>Profile SCREEN</Tab.Pane> }
 		];
 
+		const guest = [
+			{
+				menuItem: 'Home',
+				render: () => <Home />
+			},
+			{ menuItem: 'Event', render: () => <Event /> }
+		];
+
 		return (
 			<div>
 				<Header fullname={this.state.fullname} profilePic={this.state.profilePic} />
-				<Tab panes={this.state.adminUser ? adminPanes : user} />
+				<Tab
+					panes={
+						this.state.role == 'Guest' ? (
+							guest
+						) : this.state.role == 'Admin' ? (
+							adminPanes
+						) : this.state.role == 'User' ? (
+							user
+						) : (
+							guest
+						)
+					}
+				/>
 			</div>
 		);
 	}

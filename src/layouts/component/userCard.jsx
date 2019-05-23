@@ -1,18 +1,9 @@
 import React from 'react';
-// import {
-//   Card,
-//   CardActionArea,
-//   CardActions,
-//   CardContent,
-//   CardMedia,
-//   Button,
-//   Typography,
-//   IconButton
-// } from "@material-ui/core";
+import { CardActionArea, CardActions, CardContent, CardMedia, Button, Typography, IconButton } from '@material-ui/core';
 import { People } from '@material-ui/icons';
 import { Card, Icon, Header, Image, Modal } from 'semantic-ui-react';
 import LinesEllipsis from 'react-lines-ellipsis';
-import { AccessAlarm, AccessAlarmTwoTone, AcUnitRounded } from '@material-ui/icons';
+import { Edit, Delete } from '@material-ui/icons';
 import moment from 'moment';
 
 export default class UserCard extends React.Component {
@@ -63,15 +54,15 @@ export default class UserCard extends React.Component {
 			//         paddingBottom: 10
 			//       }}
 			//     >
-			//       <IconButton aria-label="Previous">
-			//         <AccessAlarm />
-			//       </IconButton>
-			//       <IconButton aria-label="Play/pause">
-			//         <AccessAlarmTwoTone style={{ height: 38, width: 38 }} />
-			//       </IconButton>
-			//       <IconButton aria-label="Next">
-			//         <AcUnitRounded />
-			//       </IconButton>
+			//   <IconButton aria-label="Previous">
+			//     <AccessAlarm />
+			//   </IconButton>
+			//   <IconButton aria-label="Play/pause">
+			//     <AccessAlarmTwoTone style={{ height: 38, width: 38 }} />
+			//   </IconButton>
+			//   <IconButton aria-label="Next">
+			//     <AcUnitRounded />
+			//   </IconButton>
 			//     </div>
 			//   </div>
 			// </Card>
@@ -84,11 +75,21 @@ export default class UserCard extends React.Component {
 					</Card.Meta>
 					<Card.Description>{this.props.content}</Card.Description>
 				</Card.Content>
-				<Card.Content extra>
-					<a>
-						<Icon name="user" />
-						22 Friends
-					</a>
+				<Card.Content>
+					<div
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+							height: 25
+						}}
+					>
+						<IconButton>
+							<Edit style={{ height: 22, width: 22 }} />
+						</IconButton>
+						<IconButton>
+							<Delete style={{ height: 22, width: 22 }} />
+						</IconButton>
+					</div>
 				</Card.Content>
 			</Card>
 		);

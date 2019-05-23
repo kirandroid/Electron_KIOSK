@@ -17,6 +17,8 @@ import { Dropdown, Image } from 'semantic-ui-react';
 import Pouchdb from 'pouchdb-browser';
 var userdb = Pouchdb('user');
 
+const remote = require('electron').remote;
+
 const style = {
 	header: {
 		flex: 1
@@ -88,6 +90,8 @@ class Header extends React.Component {
 								userdb.get('user').then(function(doc) {
 									return userdb.remove(doc);
 								});
+								var views = remote.getCurrentWindow();
+								views.loadFile(`src/index.html`);
 							}}
 						/>
 					</Toolbar>

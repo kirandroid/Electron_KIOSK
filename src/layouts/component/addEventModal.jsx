@@ -72,7 +72,7 @@ export default class AddEventModal extends React.Component {
 												variant="outlined"
 												onChange={(e) =>
 													this.setState({
-														description: e.target.value
+														seatNumber: e.target.value
 													})}
 											/>
 										</Grid.Column>
@@ -109,19 +109,16 @@ export default class AddEventModal extends React.Component {
 											onClick={() => {
 												axios
 													.post(apiurl + '/api/addevent', {
-														FIRST_NAME: this.state.firstname,
-														LAST_NAME: this.state.lastname,
-														USERNAME: this.state.username,
-														PASSWORD: this.state.password,
-														EMAIL: this.state.email,
-														STUDENT_ID: this.state.studentId,
-														GENDER: this.state.gender,
-														CONTACT: this.state.contact,
-														COURSE: this.state.course,
-														STUDY_LEVEL: this.state.study_level,
-														ROLE: 'Student',
+														TITLE: this.state.title,
+														IMAGE_URL: this.state.image,
+														DESCRIPTION: this.state.description,
+														SEAT_NUMBER: this.state.seatNumber,
 														CREATED_AT: Date.now(),
-														UPDATED_AT: Date.now()
+														UPDATED_AT: Date.now(),
+														EVENT_DATE: Date.now(),
+														EVENT_TIME: this.state.eventTime,
+														EVENT_TYPE: this.state.eventType,
+														EVENT_STATUS: this.state.eventStatus
 													})
 													.then((response) => {
 														console.log(response);
