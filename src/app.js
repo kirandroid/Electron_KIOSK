@@ -81,7 +81,7 @@ export default class App extends React.Component {
 
 		return (
 			<div>
-				<Header fullname={this.state.fullname} profilePic={this.state.profilePic} />
+				<Header fullname={this.state.fullname} profilePic={this.state.profilePic} role={this.state.role} />
 				<Tab
 					panes={
 						this.state.role == 'Guest' ? (

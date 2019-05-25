@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Image, Modal, Divider, Grid, Segment, Form, Button } from 'semantic-ui-react';
+import { Header, Image, Modal, Divider, Grid, Segment, Form, Button, Input, Icon } from 'semantic-ui-react';
 import {
 	TextField,
 	Typography,
@@ -38,86 +38,247 @@ export default class SignUpModal extends React.Component {
 			course: '',
 			study_level: '',
 			gender: 'male',
-			open: false
+			open: false,
+			file: ''
 		};
+		this._handleImageChange = this._handleImageChange.bind(this);
+		// this._handleSubmit = this._handleSubmit.bind(this);
 	}
 
-	signIn() {
-		console.log('Start');
-		axios
-			.post('http://kioskapi.tk:4000/api/login', {
-				USERNAME: this.state.username,
-				PASSWORD: this.state.password
-			})
-			.then((response) => {
-				console.log('Okay');
-			})
-			.catch((error) => {
-				console.log('No');
-			});
-	}
 	handleClickShowPassword() {
 		this.setState({ showPassword: !this.state.showPassword });
 	}
 
+	_handleImageChange(e) {
+		e.preventDefault();
+
+		let reader = new FileReader();
+		let file = e.target.files[0];
+
+		reader.onloadend = () => {
+			this.setState({
+				file: file,
+				imagePreviewUrl: reader.result
+			});
+		};
+		console.log('FILE ');
+		console.log(file);
+		console.log('Reader ');
+		console.log(reader);
+		console.log('Reader.result ');
+		console.log(reader.result);
+
+		reader.readAsDataURL(file);
+	}
+
 	render() {
+		let { imagePreviewUrl } = this.state;
+		let $imagePreview = null;
+		if (imagePreviewUrl) {
+			$imagePreview = <img src={imagePreviewUrl} />;
+		}
 		return (
 			<div>
 				<Modal trigger={this.props.trigger} dimmer={'blurring'}>
 					<Modal.Content>
 						<Modal.Description>
 							<Segment placeholder>
-								<Grid columns={2} stackable textAlign="center">
-									<Grid.Row verticalAlign="middle">
+								<div>
+									<form onSubmit={this._handleSubmit}>
+										<input type="file" onChange={this._handleImageChange} />
+										<button
+											type="submit"
+											onClick={() => {
+												console.log('File from state ');
+												console.log(this.state.file);
+												var bodyFormData = new FormData();
+												bodyFormData.append('imageFile', this.state.file);
+
+												axios({
+													method: 'post',
+													url: apiurl + '/api/upload',
+													data: bodyFormData,
+													config: { headers: { 'Content-Type': 'multipart/form-data' } }
+												})
+													.then(function(response) {
+														console.log(response);
+													})
+													.catch(function(response) {
+														console.log(response);
+													});
+											}}
+										>
+											Upload Image
+										</button>
+									</form>
+									{$imagePreview}
+								</div>
+								<Grid columns={2}>
+									<Grid.Row>
 										<Grid.Column>
+											<Input
+												fluid
+												iconPosition="left"
+												label="First Name"
+												placeholder="First Name"
+												onChange={(e) =>
+													this.setState({
+														firstname: e.target.value
+													})}
+											/>
+										</Grid.Column>
+										<Grid.Column>
+											<Input
+												fluid
+												iconPosition="left"
+												label="Last Name"
+												placeholder="Last Name"
+												onChange={(e) =>
+													this.setState({
+														lastname: e.target.value
+													})}
+											/>
+										</Grid.Column>
+									</Grid.Row>
+									<Grid.Row>
+										<Grid.Column>
+											<Input
+												fluid
+												iconPosition="left"
+												label="Username"
+												placeholder="Username"
+												onChange={(e) =>
+													this.setState({
+														username: e.target.value
+													})}
+											/>
+										</Grid.Column>
+										<Grid.Column>
+											<Input
+												fluid
+												iconPosition="left"
+												label="Email"
+												placeholder="Email"
+												onChange={(e) =>
+													this.setState({
+														email: e.target.value
+													})}
+											/>
+										</Grid.Column>
+									</Grid.Row>
+
+									<Grid.Row>
+										<Grid.Column>
+											<Input
+												fluid
+												iconPosition="right"
+												label="Password"
+												placeholder="Password"
+												type={this.state.showPassword ? 'text' : 'password'}
+												icon
+												onChange={(e) =>
+													this.setState({
+														password: e.target.value
+													})}
+											>
+												<input />
+												<IconButton
+													aria-label="Toggle password visibility"
+													onClick={this.handleClickShowPassword.bind(this)}
+												>
+													{this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+												</IconButton>
+											</Input>
+										</Grid.Column>
+										<Grid.Column>
+											<Input
+												iconPosition="left"
+												label="Student ID"
+												placeholder="Student ID"
+												onChange={(e) =>
+													this.setState({
+														studentId: e.target.value
+													})}
+											/>
+										</Grid.Column>
+									</Grid.Row>
+
+									<Grid.Row>
+										<Grid.Column>
+											<TextField
+												onChange={(e) =>
+													this.setState({
+														contact: e.target.value
+													})}
+												label="Phone"
+												margin="normal"
+												variant="outlined"
+											/>
+										</Grid.Column>
+										<Grid.Column>
+											<Input
+												fluid
+												iconPosition="left"
+												label="Email"
+												placeholder="Email"
+												onChange={(e) =>
+													this.setState({
+														email: e.target.value
+													})}
+											/>
+										</Grid.Column>
+									</Grid.Row>
+									{/* <Grid.Column>
 											<Typography gutterBottom variant="h5" component="h2">
 												Sign Up
 											</Typography>
-											<Grid columns={2}>
+											<Grid columns={2} relaxed>
 												<Grid.Column>
-													<TextField
+													<Input
+														fluid
+														iconPosition="left"
+														label="First Name"
+														placeholder="First Name"
 														onChange={(e) =>
 															this.setState({
 																firstname: e.target.value
 															})}
-														label="First Name"
-														margin="normal"
-														variant="outlined"
 													/>
 												</Grid.Column>
 
 												<Grid.Column>
-													<TextField
+													<Input
+														fluid
+														iconPosition="left"
+														label="Last Name"
+														placeholder="Last Name"
 														onChange={(e) =>
 															this.setState({
 																lastname: e.target.value
 															})}
-														label="Last Name"
-														margin="normal"
-														variant="outlined"
 													/>
 												</Grid.Column>
 												<Grid.Column>
-													<TextField
+													<Input
+														iconPosition="left"
+														label="Username"
+														placeholder="Username"
 														onChange={(e) =>
 															this.setState({
 																username: e.target.value
 															})}
-														label="Username"
-														margin="normal"
-														variant="outlined"
 													/>
 												</Grid.Column>
 
 												<Grid.Column>
-													<TextField
+													<Input
+														iconPosition="left"
+														label="Email"
+														placeholder="Email"
 														onChange={(e) =>
 															this.setState({
 																email: e.target.value
 															})}
-														label="Email"
-														margin="normal"
-														variant="outlined"
 													/>
 												</Grid.Column>
 
@@ -153,14 +314,14 @@ export default class SignUpModal extends React.Component {
 												</Grid.Column>
 
 												<Grid.Column>
-													<TextField
+													<Input
+														iconPosition="left"
+														label="Student ID"
+														placeholder="Student ID"
 														onChange={(e) =>
 															this.setState({
 																studentId: e.target.value
 															})}
-														label="Student ID"
-														margin="normal"
-														variant="outlined"
 													/>
 												</Grid.Column>
 
@@ -291,8 +452,7 @@ export default class SignUpModal extends React.Component {
 													}}
 												/>
 											</Grid>
-										</Grid.Column>
-									</Grid.Row>
+										</Grid.Column> */}
 								</Grid>
 							</Segment>
 						</Modal.Description>

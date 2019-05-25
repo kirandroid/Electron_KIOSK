@@ -75,22 +75,6 @@ export default class UserCard extends React.Component {
 					</Card.Meta>
 					<Card.Description>{this.props.content}</Card.Description>
 				</Card.Content>
-				<Card.Content>
-					<div
-						style={{
-							display: 'flex',
-							alignItems: 'center',
-							height: 25
-						}}
-					>
-						<IconButton>
-							<Edit style={{ height: 22, width: 22 }} />
-						</IconButton>
-						<IconButton>
-							<Delete style={{ height: 22, width: 22 }} />
-						</IconButton>
-					</div>
-				</Card.Content>
 			</Card>
 		);
 	}

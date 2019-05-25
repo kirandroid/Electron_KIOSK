@@ -9,21 +9,45 @@ import axios from 'axios';
 import AddEventModal from '../../component/addEventModal';
 import { apiurl } from '../../../store/data';
 
+import Pouchdb from 'pouchdb-browser';
+var userdb = Pouchdb('user');
 export default class Event extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			events: [],
-			loading: false
+			loading: false,
+			role: ''
 		};
 	}
 
 	componentDidMount() {
+		this.fetchfromlocal();
 		axios.get(apiurl + `/api/events`).then((res) => {
 			const events = res.data;
 			console.log(res.data);
 			this.setState({ events, loading: false });
 		});
+	}
+
+	fetchfromlocal() {
+		userdb
+			.get('user')
+			.then((doc) => {
+				this.setState({
+					role: doc.ROLE
+				});
+			})
+			.catch((err) => {
+				if (err.name === 'not_found') {
+					console.log(err);
+					this.setState({
+						role: 'Guest'
+					});
+				} else {
+					console.log(err);
+				}
+			});
 	}
 	render() {
 		return (
@@ -50,18 +74,21 @@ export default class Event extends Component {
 									/>
 								</Grid>
 							))}
-							<AddEventModal
-								trigger={
-									<Fab
-										style={{ position: 'absolute', bottom: 20, right: 20 }}
-										variant="extended"
-										aria-label="Delete"
-									>
-										<Add />
-										Add Event
-									</Fab>
-								}
-							/>
+							{this.state.role == 'Guest' ? null : (
+								<AddEventModal
+									trigger={
+										<Fab
+											style={{ position: 'absolute', bottom: 20, right: 20 }}
+											variant="extended"
+											aria-label="Delete"
+											color="red"
+										>
+											<Add />
+											Add Event
+										</Fab>
+									}
+								/>
+							)}
 						</Grid>
 					</div>
 				)}

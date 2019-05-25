@@ -14,6 +14,9 @@ import {
 import { Search, Notifications } from '@material-ui/icons';
 import UserAvatar from 'react-user-avatar';
 import { Dropdown, Image } from 'semantic-ui-react';
+import LoadingModal from '../component/loadingModal';
+import AuthModal from '../component/authModal';
+
 import Pouchdb from 'pouchdb-browser';
 var userdb = Pouchdb('user');
 
@@ -49,10 +52,8 @@ const style = {
 	}
 };
 
-class Header extends React.Component {
+export default class Header extends React.Component {
 	render() {
-		const options = [ { key: 'sign-out', text: 'Sign Out', icon: 'sign out' } ];
-
 		return (
 			<div>
 				<AppBar position="static" color="default" style={{ elevation: 0 }}>
@@ -74,6 +75,21 @@ class Header extends React.Component {
 								<Notifications />
 							</Badge>
 						</IconButton>
+						{/* <Dropdown
+							trigger={
+								<UserAvatar
+									size="48"
+									name={this.props.fullname}
+									src={this.props.profilePic}
+									style={style.avatar}
+								/>
+							}
+						>
+							 <Dropdown.Menu>
+      <Dropdown.Item text='New' />
+	  </Dropdown.Menu>
+							</Dropdown> */}
+
 						<Dropdown
 							trigger={
 								<UserAvatar
@@ -83,26 +99,42 @@ class Header extends React.Component {
 									style={style.avatar}
 								/>
 							}
-							options={options}
 							pointing="top right"
 							icon={null}
-							onClick={() => {
-								userdb.get('user').then(function(doc) {
-									return userdb.remove(doc);
-								});
-								var views = remote.getCurrentWindow();
-								views.loadFile(`src/index.html`);
-							}}
-						/>
+						>
+							<Dropdown.Menu>
+								{this.props.role == 'Guest' ? (
+									<AuthModal
+										openModal={true}
+										trigger={
+											<div style={{ padding: 10 }}>
+												<Dropdown.Item text="Sign In" onClick={() => {}} />
+											</div>
+										}
+									/>
+								) : (
+									<LoadingModal
+										trigger={
+											<div style={{ padding: 10 }}>
+												<Dropdown.Item
+													text="Sign Out"
+													onClick={() => {
+														userdb.get('user').then(function(doc) {
+															return userdb.remove(doc);
+														});
+														var views = remote.getCurrentWindow();
+														views.loadFile(`src/index.html`);
+													}}
+												/>
+											</div>
+										}
+									/>
+								)}
+							</Dropdown.Menu>
+						</Dropdown>
 					</Toolbar>
 				</AppBar>
 			</div>
 		);
 	}
 }
-
-export default Header;
-// <Button variant="contained" onClick={() => console.log('Clickeds')}>
-// 					{' '}
-// 					Hello
-// 				</Button>
