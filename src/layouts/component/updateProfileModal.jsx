@@ -233,23 +233,6 @@ export default class UpdateProfileModal extends React.Component {
 								primary
 								disabled={this.state.changed ? false : true}
 								onClick={() => {
-									// console.log(
-									// 	!this.state.firstnameChanged ? this.props.firstName : this.state.firstname
-									// );
-									// console.log(
-									// 	!this.state.lastnameChanged ? this.props.lastName : this.state.lastname
-									// );
-									// console.log(
-									// 	!this.state.usernameChanged ? this.props.userName : this.state.username
-									// );
-									// console.log(!this.state.emailChanged ? this.props.email : this.state.email);
-									// console.log(!this.state.contactChanged ? this.props.contact : this.state.contact);
-									// console.log(
-									// 	!this.state.levelChanged ? this.props.study_level : this.state.study_level
-									// );
-									// console.log(!this.state.courseChanged ? this.props.course : this.state.course);
-									// console.log(!this.state.genderChanged ? this.props.gender : this.state.gender);
-
 									axios
 										.put(apiurl + '/api/updateProfile', {
 											FIRST_NAME: !this.state.firstnameChanged

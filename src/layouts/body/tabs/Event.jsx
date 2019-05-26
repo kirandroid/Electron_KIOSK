@@ -74,7 +74,7 @@ export default class Event extends Component {
 									/>
 								</Grid>
 							))}
-							{this.state.role == 'Guest' ? null : (
+							{this.state.role == 'Guest' || 'Student' ? null : (
 								<AddEventModal
 									trigger={
 										<Fab

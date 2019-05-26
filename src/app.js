@@ -87,8 +87,8 @@ export default class App extends React.Component {
 			},
 			{ menuItem: 'Event', render: () => <Event /> },
 			{ menuItem: 'All Bookings', render: () => <Tab.Pane>Booking SCREEN</Tab.Pane> },
-			{ menuItem: 'Activities', render: () => <Activities /> },
-			{ menuItem: 'Services', render: () => <Services /> },
+			{ menuItem: 'Activities', render: () => <Activities role={this.state.role} /> },
+			{ menuItem: 'Services', render: () => <Services role={this.state.role} /> },
 			{ menuItem: 'Event', render: () => <Event /> },
 			{ menuItem: 'User', render: () => <User /> }
 		];
@@ -100,8 +100,8 @@ export default class App extends React.Component {
 			},
 			{ menuItem: 'Event', render: () => <Event /> },
 			{ menuItem: 'My Bookings', render: () => <Tab.Pane>Study SCREEN</Tab.Pane> },
-			{ menuItem: 'Activities', render: () => <Activities /> },
-			{ menuItem: 'Services', render: () => <Services /> },
+			{ menuItem: 'Activities', render: () => <Activities role={this.state.role} /> },
+			{ menuItem: 'Services', render: () => <Services role={this.state.role} /> },
 			{
 				menuItem: 'Profile',
 				render: () => (
@@ -132,8 +132,8 @@ export default class App extends React.Component {
 				render: () => <Home />
 			},
 			{ menuItem: 'Event', render: () => <Event /> },
-			{ menuItem: 'Activities', render: () => <Activities /> },
-			{ menuItem: 'Services', render: () => <Services /> }
+			{ menuItem: 'Activities', render: () => <Activities role={this.state.role} /> },
+			{ menuItem: 'Services', render: () => <Services role={this.state.role} /> }
 		];
 
 		return (
