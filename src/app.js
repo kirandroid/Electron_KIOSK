@@ -4,7 +4,9 @@ import Header from './layouts/component/header';
 import Home from './layouts/body/tabs/Home';
 import Event from './layouts/body/tabs/Event';
 import User from './layouts/body/tabs/admin/User';
-// import { tabs } from "../src/store/data";
+import Profile from './layouts/body/tabs/Profile';
+import Activities from './layouts/body/tabs/Activities';
+import Services from './layouts/body/tabs/Services';
 import { Button, Tab } from 'semantic-ui-react';
 import Pouchdb from 'pouchdb-browser';
 var userdb = Pouchdb('user');
@@ -13,10 +15,23 @@ export default class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			adminUser: true,
 			role: '',
 			fullname: 'Guest User',
-			profilePic: ''
+			profilePic: '',
+			userId: '',
+			username: '',
+			password: '',
+			firstname: '',
+			lastname: '',
+			email: '',
+			studentId: '',
+			contact: '',
+			password: '',
+			course: '',
+			study_level: '',
+			gender: '',
+			createdAt: '',
+			updatedAt: ''
 		};
 	}
 
@@ -31,7 +46,21 @@ export default class App extends React.Component {
 				this.setState({
 					role: doc.ROLE,
 					fullname: (doc.FIRST_NAME + ' ' + doc.LAST_NAME).toString(),
-					profilePic: doc.IMAGE_URL
+					profilePic: doc.IMAGE_URL,
+					userId: doc.USER_ID,
+					username: doc.USERNAME,
+					password: doc.PASSWORD,
+					firstname: doc.FIRST_NAME,
+					lastname: doc.LAST_NAME,
+					email: doc.EMAIL,
+					studentId: doc.STUDENT_ID,
+					contact: doc.CONTACT,
+					password: doc.PASSWORD,
+					course: doc.COURSE,
+					study_level: doc.STUDY_LEVEL,
+					gender: doc.GENDER,
+					createdAt: doc.CREATED_AT,
+					updatedAt: doc.UPDATED_AT
 				});
 			})
 			.catch((err) => {
@@ -51,14 +80,17 @@ export default class App extends React.Component {
 
 	render() {
 		const adminPanes = [
+			{ menuItem: 'Dashboard', render: () => <Tab.Pane>Dashboard</Tab.Pane> },
 			{
 				menuItem: 'Home',
 				render: () => <Home />
 			},
 			{ menuItem: 'Event', render: () => <Event /> },
-			{ menuItem: 'Bookings', render: () => <Tab.Pane>Study SCREEN</Tab.Pane> },
-			{ menuItem: 'User', render: () => <User /> },
-			{ menuItem: 'Dashboard', render: () => <Tab.Pane>Profile SCREEN</Tab.Pane> }
+			{ menuItem: 'All Bookings', render: () => <Tab.Pane>Booking SCREEN</Tab.Pane> },
+			{ menuItem: 'Activities', render: () => <Activities /> },
+			{ menuItem: 'Services', render: () => <Services /> },
+			{ menuItem: 'Event', render: () => <Event /> },
+			{ menuItem: 'User', render: () => <User /> }
 		];
 
 		const user = [
@@ -67,8 +99,31 @@ export default class App extends React.Component {
 				render: () => <Home />
 			},
 			{ menuItem: 'Event', render: () => <Event /> },
-			{ menuItem: 'Bookings', render: () => <Tab.Pane>Study SCREEN</Tab.Pane> },
-			{ menuItem: 'Profile', render: () => <Tab.Pane>Profile SCREEN</Tab.Pane> }
+			{ menuItem: 'My Bookings', render: () => <Tab.Pane>Study SCREEN</Tab.Pane> },
+			{ menuItem: 'Activities', render: () => <Activities /> },
+			{ menuItem: 'Services', render: () => <Services /> },
+			{
+				menuItem: 'Profile',
+				render: () => (
+					<Profile
+						userID={this.state.userId}
+						firstName={this.state.firstname}
+						lastName={this.state.lastname}
+						userName={this.state.username}
+						password={this.state.password}
+						email={this.state.email}
+						profilePic={this.state.profilePic}
+						createdAt={this.state.createdAt}
+						updatedAt={this.state.updatedAt}
+						studentId={this.state.studentId}
+						role={this.state.role}
+						study_level={this.state.study_level}
+						course={this.state.course}
+						contact={this.state.contact}
+						gender={this.state.gender}
+					/>
+				)
+			}
 		];
 
 		const guest = [
@@ -76,7 +131,9 @@ export default class App extends React.Component {
 				menuItem: 'Home',
 				render: () => <Home />
 			},
-			{ menuItem: 'Event', render: () => <Event /> }
+			{ menuItem: 'Event', render: () => <Event /> },
+			{ menuItem: 'Activities', render: () => <Activities /> },
+			{ menuItem: 'Services', render: () => <Services /> }
 		];
 
 		return (
@@ -88,7 +145,7 @@ export default class App extends React.Component {
 							guest
 						) : this.state.role == 'Admin' ? (
 							adminPanes
-						) : this.state.role == 'User' ? (
+						) : this.state.role == 'Student' ? (
 							user
 						) : (
 							guest

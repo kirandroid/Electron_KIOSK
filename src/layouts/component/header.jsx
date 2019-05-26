@@ -56,7 +56,7 @@ export default class Header extends React.Component {
 	render() {
 		return (
 			<div>
-				<AppBar position="static" color="default" style={{ elevation: 0 }}>
+				<AppBar position="static" color="#fff" style={{ elevation: 0 }}>
 					<Toolbar style={style.header}>
 						<Typography variant="h6" color="inherit" style={style.logo}>
 							KIOSK
