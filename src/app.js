@@ -6,6 +6,7 @@ import Event from './layouts/body/tabs/Event';
 import User from './layouts/body/tabs/admin/User';
 import Profile from './layouts/body/tabs/Profile';
 import Activities from './layouts/body/tabs/Activities';
+import Booking from './layouts/body/tabs/Booking';
 import Services from './layouts/body/tabs/Services';
 import { Button, Tab } from 'semantic-ui-react';
 import Pouchdb from 'pouchdb-browser';
@@ -85,11 +86,10 @@ export default class App extends React.Component {
 				menuItem: 'Home',
 				render: () => <Home />
 			},
-			{ menuItem: 'Event', render: () => <Event /> },
-			{ menuItem: 'All Bookings', render: () => <Tab.Pane>Booking SCREEN</Tab.Pane> },
+			{ menuItem: 'Event', render: () => <Event role={this.state.role} /> },
+			{ menuItem: 'All Bookings', render: () => <Booking role={this.state.role} /> },
 			{ menuItem: 'Activities', render: () => <Activities role={this.state.role} /> },
 			{ menuItem: 'Services', render: () => <Services role={this.state.role} /> },
-			{ menuItem: 'Event', render: () => <Event /> },
 			{ menuItem: 'User', render: () => <User /> }
 		];
 
@@ -98,8 +98,8 @@ export default class App extends React.Component {
 				menuItem: 'Home',
 				render: () => <Home />
 			},
-			{ menuItem: 'Event', render: () => <Event /> },
-			{ menuItem: 'My Bookings', render: () => <Tab.Pane>Study SCREEN</Tab.Pane> },
+			{ menuItem: 'Event', render: () => <Event role={this.state.role} userId={this.state.userId} /> },
+			{ menuItem: 'My Bookings', render: () => <Booking role={this.state.role} userId={this.state.userId} /> },
 			{ menuItem: 'Activities', render: () => <Activities role={this.state.role} /> },
 			{ menuItem: 'Services', render: () => <Services role={this.state.role} /> },
 			{
@@ -131,7 +131,7 @@ export default class App extends React.Component {
 				menuItem: 'Home',
 				render: () => <Home />
 			},
-			{ menuItem: 'Event', render: () => <Event /> },
+			{ menuItem: 'Event', render: () => <Event role={this.state.role} /> },
 			{ menuItem: 'Activities', render: () => <Activities role={this.state.role} /> },
 			{ menuItem: 'Services', render: () => <Services role={this.state.role} /> }
 		];

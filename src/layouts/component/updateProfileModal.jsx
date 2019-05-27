@@ -51,7 +51,6 @@ export default class UpdateProfileModal extends React.Component {
 	}
 
 	render() {
-		const profile = { render: () => <Profile /> };
 		return (
 			<div>
 				<Modal trigger={this.props.trigger} dimmer={'blurring'} size="small">
@@ -258,7 +257,6 @@ export default class UpdateProfileModal extends React.Component {
 										})
 										.then((response) => {
 											console.log(response);
-											profile;
 										})
 										.catch((error) => {
 											console.log(error);

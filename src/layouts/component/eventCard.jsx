@@ -8,36 +8,29 @@ import EventDetailModal from '../component/eventDetailModal';
 import LoadingModal from '../component/loadingModal';
 import Pouchdb from 'pouchdb-browser';
 var userdb = Pouchdb('user');
+import axios from 'axios';
+import { apiurl } from '../../store/data';
 
 export default class EventCard extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			role: ''
+			isBooked: false
 		};
 	}
 
-	componentWillMount() {
-		this.fetchfromlocal();
+	componentDidMount() {
+		{
+			this.props.role == 'STUDENT' ? null : this.fetchData();
+		}
 	}
 
-	fetchfromlocal() {
-		userdb
-			.get('user')
-			.then((doc) => {
-				this.setState({
-					role: doc.ROLE
-				});
-			})
-			.catch((err) => {
-				if (err.name === 'not_found') {
-					console.log(err);
-					this.setState({
-						role: 'Guest'
-					});
-				} else {
-					console.log(err);
-				}
+	fetchData() {
+		axios
+			.get(apiurl + `/api/checkBookedEvent?eventid=${this.props.eventId}&userid=${this.props.userId}`)
+			.then((res) => {
+				const isBooked = res.data['hasBooked'];
+				this.setState({ isBooked });
 			});
 	}
 	render() {
@@ -47,6 +40,16 @@ export default class EventCard extends React.Component {
 					eventTitle={this.props.title}
 					eventImage={this.props.image}
 					eventDesc={this.props.content}
+					totalSeat={this.props.totalSeat}
+					createdAt={this.props.createdAt}
+					updatedAt={this.props.updatedAt}
+					eventStartDate={this.props.eventStartDate}
+					eventType={this.props.eventType}
+					eventStatus={this.props.eventStatus}
+					eventEndDate={this.props.eventEndDate}
+					seatLeft={this.props.seatLeft}
+					eventId={this.props.eventId}
+					userId={this.props.userId}
 					trigger={
 						<CardActionArea onClick={() => {}}>
 							<CardMedia style={{ height: 140 }} image={this.props.image} />
@@ -76,7 +79,7 @@ export default class EventCard extends React.Component {
 
 				<CardActions>
 					{/* To call a Signup Modal when clicked semantic needs to pass a trigger, so here the trigger is the button */}
-					{this.state.role == 'Guest' ? (
+					{this.props.role == 'Guest' ? (
 						<AuthModal
 							trigger={
 								<Button size="small" color="primary">
@@ -84,7 +87,7 @@ export default class EventCard extends React.Component {
 								</Button>
 							}
 						/>
-					) : (
+					) : this.props.role == 'Student' ? this.state.isBooked == false ? (
 						<LoadingModal
 							trigger={
 								<Button size="small" color="primary">
@@ -92,6 +95,14 @@ export default class EventCard extends React.Component {
 								</Button>
 							}
 						/>
+					) : (
+						<Button size="small" color="secondary">
+							Booked
+						</Button>
+					) : (
+						<Button size="small" color="primary">
+							Book
+						</Button>
 					)}
 
 					<Button size="small" color="primary">
