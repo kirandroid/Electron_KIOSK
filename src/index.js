@@ -8,8 +8,7 @@ let mainWindow;
 
 const isDevMode = process.execPath.match(/[\\/]electron/);
 
-// if (isDevMode)
-enableLiveReload({ strategy: 'react-hmr' });
+if (isDevMode) enableLiveReload({ strategy: 'naive' });
 const createWindow = async () => {
 	// Create the browser window.
 	mainWindow = new BrowserWindow({
@@ -18,7 +17,7 @@ const createWindow = async () => {
 		height: 600,
 		resizable: false,
 		maximizable: false,
-		kiosk: false
+		kiosk: true
 	});
 	mainWindow.once('ready-to-show', () => {
 		mainWindow.show();
