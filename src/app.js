@@ -1,6 +1,5 @@
 import React from 'react';
 import HeaderSection from './layouts/component/header';
-// import Tab from "./layouts/body/tab";
 import Home from './layouts/body/tabs/Home';
 import Event from './layouts/body/tabs/Event';
 import User from './layouts/body/tabs/admin/User';
