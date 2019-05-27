@@ -1,7 +1,7 @@
 import React from 'react';
-import { Modal, Grid, Button, Confirm } from 'semantic-ui-react';
+import { Modal, Grid, Confirm } from 'semantic-ui-react';
 
-import { TextField, InputAdornment, IconButton } from '@material-ui/core';
+import { TextField, InputAdornment, IconButton, Button } from '@material-ui/core';
 import axios from 'axios';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import Pouchdb from 'pouchdb-browser';
@@ -17,7 +17,9 @@ export default class AuthModal extends React.Component {
 			username: '',
 			password: '',
 			showPassword: false,
-			changed: false
+			changed: false,
+			usernameError: false,
+			passwordError: false
 		};
 	}
 
@@ -51,6 +53,8 @@ export default class AuthModal extends React.Component {
 												changed: true
 											})}
 										label="Username"
+										error={this.state.usernameError}
+										helperText={this.state.usernameError == true ? 'Username is invalid' : null}
 										margin="normal"
 										variant="outlined"
 									/>
@@ -60,6 +64,8 @@ export default class AuthModal extends React.Component {
 										variant="outlined"
 										type={this.state.showPassword ? 'text' : 'password'}
 										label="Password"
+										error={this.state.passwordError}
+										helperText={this.state.passwordError == true ? 'Password is invalid' : null}
 										value={this.state.password}
 										onChange={(e) =>
 											this.setState({
@@ -91,9 +97,10 @@ export default class AuthModal extends React.Component {
 							}}
 						>
 							<Button
+								type="submit"
+								variant="contained"
+								color="primary"
 								style={{ marginRight: '10px' }}
-								content="Login"
-								primary
 								disabled={this.state.changed ? false : true}
 								onClick={() => {
 									axios
@@ -125,11 +132,13 @@ export default class AuthModal extends React.Component {
 													USER_ID: response.data[0].USER_ID
 												};
 												userdb.put(userData);
-												// var views = remote.getCurrentWindow();
-												// views.loadFile(`src/index.html`);
 												window.location.reload();
 											} else if (response.status == 204) {
 												console.log('Status 204');
+												this.setState({
+													usernameError: true,
+													passwordError: true
+												});
 												<Confirm content="Incorrent Student ID or Password!" />;
 											} else {
 												console.log('Other');
@@ -140,8 +149,17 @@ export default class AuthModal extends React.Component {
 											console.log(error);
 										});
 								}}
+							>
+								Login
+							</Button>
+
+							<SignUpModal
+								trigger={
+									<Button type="submit" variant="contained" color="secondary">
+										Register An Account
+									</Button>
+								}
 							/>
-							<SignUpModal trigger={<Button content="Register An Account" secondary />} />
 						</div>
 					</Modal.Actions>
 				</Modal>

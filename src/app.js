@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './layouts/component/header';
+import HeaderSection from './layouts/component/header';
 // import Tab from "./layouts/body/tab";
 import Home from './layouts/body/tabs/Home';
 import Event from './layouts/body/tabs/Event';
@@ -81,7 +81,6 @@ export default class App extends React.Component {
 
 	render() {
 		const adminPanes = [
-			{ menuItem: 'Dashboard', render: () => <Tab.Pane>Dashboard</Tab.Pane> },
 			{
 				menuItem: 'Home',
 				render: () => <Home />
@@ -138,7 +137,11 @@ export default class App extends React.Component {
 
 		return (
 			<div>
-				<Header fullname={this.state.fullname} profilePic={this.state.profilePic} role={this.state.role} />
+				<HeaderSection
+					fullname={this.state.fullname}
+					profilePic={this.state.profilePic}
+					role={this.state.role}
+				/>
 				<Tab
 					panes={
 						this.state.role == 'Guest' ? (

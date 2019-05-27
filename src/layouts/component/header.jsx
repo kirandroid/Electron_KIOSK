@@ -70,25 +70,6 @@ export default class Header extends React.Component {
 								<Search />
 							</IconButton>
 						</Paper>
-						<IconButton>
-							<Badge badgeContent={40} color="secondary" max={99}>
-								<Notifications />
-							</Badge>
-						</IconButton>
-						{/* <Dropdown
-							trigger={
-								<UserAvatar
-									size="48"
-									name={this.props.fullname}
-									src={this.props.profilePic}
-									style={style.avatar}
-								/>
-							}
-						>
-							 <Dropdown.Menu>
-      <Dropdown.Item text='New' />
-	  </Dropdown.Menu>
-							</Dropdown> */}
 
 						<Dropdown
 							trigger={

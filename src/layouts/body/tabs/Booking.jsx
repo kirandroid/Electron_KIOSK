@@ -15,6 +15,7 @@ export default class Booking extends Component {
 	}
 
 	componentDidMount() {
+		var events = [];
 		{
 			// axios
 			// 	.get(
@@ -51,21 +52,20 @@ export default class Booking extends Component {
 							const bookings = res.data;
 							this.setState({ bookings });
 							console.log(bookings);
-						})
-						.then(() =>
 							this.state.bookings.map((booking) =>
 								axios
 									.get(apiurl + `/api/selectevents?eventId=${booking.EVENT_ID}`)
 									.then((res) => {
-										const events = res.data;
-										this.setState({ events });
-										console.log(this.state.events);
+										events.push(res.data);
 									})
 									.catch((err) => {
 										console.log(err);
 									})
-							)
-						)
+							);
+
+							this.setState({ events });
+							console.log(this.state.events);
+						})
 						.catch((err) => {
 							console.log(err);
 						})
@@ -75,21 +75,20 @@ export default class Booking extends Component {
 							const bookings = res.data;
 							this.setState({ bookings });
 							console.log(bookings);
-						})
-						.then(() =>
 							this.state.bookings.map((booking) =>
 								axios
 									.get(apiurl + `/api/selectevents?eventId=${booking.EVENT_ID}`)
 									.then((res) => {
-										const events = res.data;
-										this.setState({ events });
-										console.log(events);
+										events.push(res.data);
 									})
 									.catch((err) => {
 										console.log(err);
 									})
-							)
-						)
+							);
+
+							this.setState({ events });
+							console.log(this.state.events);
+						})
 						.catch((err) => {
 							console.log(err);
 						});

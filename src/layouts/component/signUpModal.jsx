@@ -32,7 +32,18 @@ export default class SignUpModal extends React.Component {
 			gender: 'male',
 			changed: false,
 			showPassword: false,
-			open: false
+			open: false,
+			usernameError: false,
+			passwordError: false,
+			firstnameError: false,
+			lastnameError: false,
+			emailError: false,
+			studentIdError: false,
+			contactError: false,
+			passwordError: false,
+			courseError: false,
+			studylevelError: false,
+			genderError: false
 		};
 	}
 	handleClickShowPassword() {
@@ -142,6 +153,12 @@ export default class SignUpModal extends React.Component {
 												changed: true
 											})}
 										label="Student ID"
+										error={this.state.studentIdError == true ? true : false}
+										helperText={
+											this.state.studentIdError == true ? (
+												'Student Id is invalid or already used'
+											) : null
+										}
 										margin="normal"
 										variant="outlined"
 									/>
@@ -246,27 +263,123 @@ export default class SignUpModal extends React.Component {
 								disabled={this.state.changed ? false : true}
 								onClick={() => {
 									axios
-										.post(apiurl + '/api/register', {
-											FIRST_NAME: this.state.firstname,
-											LAST_NAME: this.state.lastname,
-											USERNAME: this.state.username,
-											PASSWORD: this.state.password,
-											EMAIL: this.state.email,
-											STUDENT_ID: this.state.studentId,
-											GENDER: this.state.gender,
-											CONTACT: this.state.contact,
-											COURSE: this.state.course,
-											STUDY_LEVEL: this.state.study_level,
-											ROLE: 'Student',
-											CREATED_AT: Date.now(),
-											UPDATED_AT: Date.now()
-										})
+										.get(apiurl + `/api/checkstudent?studentid=${this.state.studentId}`, {})
 										.then((response) => {
-											console.log(response);
+											console.log(response.data['isAvail']);
+											if (response.data['isAvail'] == true) {
+												if (this.state.firstname == '') {
+													this.setState({
+														firstnameError: true
+													});
+												} else if (this.state.lastname == '') {
+													this.setState({
+														lastnameError: true
+													});
+												} else if (this.state.username == '') {
+													this.setState({
+														usernameError: true
+													});
+												} else if (this.state.password == '') {
+													this.setState({
+														passwordError: true
+													});
+												} else if (this.state.email == '') {
+													this.setState({
+														emailError: true
+													});
+												} else if (this.state.studentId == '') {
+													this.setState({
+														studentIdError: true
+													});
+												} else if (this.state.contact == '') {
+													this.setState({
+														contactError: true
+													});
+												} else if (this.state.course == '') {
+													this.setState({
+														courseError: true
+													});
+												} else if (this.state.study_level == '') {
+													this.setState({
+														studyLevelError: true
+													});
+												} else if (this.state.gender == '') {
+													this.setState({
+														genderError: true
+													});
+												} else {
+													this.setState({
+														usernameError: false,
+														passwordError: false,
+														firstnameError: false,
+														lastnameError: false,
+														emailError: false,
+														studentIdError: false,
+														contactError: false,
+														passwordError: false,
+														courseError: false,
+														studylevelError: false,
+														genderError: false
+													});
+
+													axios
+														.post(apiurl + '/api/register', {
+															FIRST_NAME: this.state.firstname,
+															LAST_NAME: this.state.lastname,
+															USERNAME: this.state.username,
+															PASSWORD: this.state.password,
+															EMAIL: this.state.email,
+															STUDENT_ID: this.state.studentId,
+															GENDER: this.state.gender,
+															CONTACT: this.state.contact,
+															COURSE: this.state.course,
+															STUDY_LEVEL: this.state.study_level,
+															ROLE: 'Student',
+															CREATED_AT: Date.now(),
+															UPDATED_AT: Date.now()
+														})
+														.then((response) => {
+															console.log(response);
+														})
+														.catch((error) => {
+															console.log(error);
+														});
+												}
+												this.setState({
+													studentIdError: false
+												});
+											} else {
+												this.setState({
+													studentIdError: true
+												});
+											}
 										})
 										.catch((error) => {
 											console.log(error);
 										});
+
+									// axios
+									// 	.post(apiurl + '/api/register', {
+									// 		FIRST_NAME: this.state.firstname,
+									// 		LAST_NAME: this.state.lastname,
+									// 		USERNAME: this.state.username,
+									// 		PASSWORD: this.state.password,
+									// 		EMAIL: this.state.email,
+									// 		STUDENT_ID: this.state.studentId,
+									// 		GENDER: this.state.gender,
+									// 		CONTACT: this.state.contact,
+									// 		COURSE: this.state.course,
+									// 		STUDY_LEVEL: this.state.study_level,
+									// 		ROLE: 'Student',
+									// 		CREATED_AT: Date.now(),
+									// 		UPDATED_AT: Date.now()
+									// 	})
+									// 	.then((response) => {
+									// 		console.log(response);
+									// 	})
+									// 	.catch((error) => {
+									// 		console.log(error);
+									// 	});
 								}}
 							/>
 						</div>
