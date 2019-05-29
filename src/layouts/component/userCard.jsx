@@ -9,65 +9,16 @@ import moment from 'moment';
 export default class UserCard extends React.Component {
 	render() {
 		return (
-			// <Card style={{ maxWidth: 345 }}>
-			// 	<CardActionArea>
-			// 		<CardMedia style={{ height: 140 }} image={this.props.image} />
-			// 		<CardContent>
-			// 			<Typography gutterBottom variant="h5" component="h2">
-			// 				{this.props.title}
-			// 			</Typography>
-			// 			<Typography component="p">
-			// 				<LinesEllipsis
-			// 					text={this.props.content}
-			// 					maxLine="1"
-			// 					ellipsis="..."
-			// 					trimRight
-			// 					basedOn="letters"
-			// 				/>
-			// 			</Typography>
-			// 		</CardContent>
-			// 	</CardActionArea>
-			// 	<CardActions>
-			// 		<Button size="small" color="primary">
-			// 			<People />
-			// 			12 Seat Left!
-			// 		</Button>
-			// 	</CardActions>
-			// </Card>
-
-			// <Card style={{ display: "flex" }}>
-			//   <CardMedia style={{ width: 151 }} image={this.props.image} />
-			//   <div style={{ display: "flex", flexDirection: "column" }}>
-			//     <CardContent style={{ flex: "1 0 auto" }}>
-			//       <Typography component="h5" variant="h5">
-			//         {this.props.title}
-			//       </Typography>
-			//       <Typography variant="subtitle1" color="textSecondary">
-			//         {moment(Date.now()).fromNow()}
-			//       </Typography>
-			//     </CardContent>
-			//     <div
-			//       style={{
-			//         display: "flex",
-			//         alignItems: "center",
-			//         paddingLeft: 10,
-			//         paddingBottom: 10
-			//       }}
-			//     >
-			//   <IconButton aria-label="Previous">
-			//     <AccessAlarm />
-			//   </IconButton>
-			//   <IconButton aria-label="Play/pause">
-			//     <AccessAlarmTwoTone style={{ height: 38, width: 38 }} />
-			//   </IconButton>
-			//   <IconButton aria-label="Next">
-			//     <AcUnitRounded />
-			//   </IconButton>
-			//     </div>
-			//   </div>
-			// </Card>
 			<Card>
-				<Image src={this.props.image} wrapped ui={false} />
+				<Image
+					src={this.props.image}
+					wrapped
+					ui={false}
+					style={{
+						height: 200,
+						backgroundSize: 'cover'
+					}}
+				/>
 				<Card.Content>
 					<Card.Header>{this.props.title}</Card.Header>
 					<Card.Meta>

@@ -145,6 +145,7 @@ export default class Home extends Component {
 									pageDots: false,
 									autoPlay: true
 								}}
+								reloadOnUpdate={true} // default false
 							>
 								{this.state.newsNotices.map((data) => (
 									<Item
@@ -153,7 +154,7 @@ export default class Home extends Component {
 										created={data.CREATED_AT}
 										type={data.TYPE}
 										onClick={() => {
-											console.log('Clicked');
+											console.log('Cliacked');
 										}}
 									/>
 								))}

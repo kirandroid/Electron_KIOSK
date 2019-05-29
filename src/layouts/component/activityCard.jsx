@@ -6,7 +6,13 @@ export default class ActivityCard extends React.Component {
 	render() {
 		return (
 			<Card>
-				<Image src={this.props.image} wrapped ui={false} />
+				<Image
+					src={this.props.image}
+					style={{
+						height: 200,
+						backgroundSize: 'cover'
+					}}
+				/>
 				<Card.Content>
 					<Card.Header>{this.props.title}</Card.Header>
 					<Card.Description>
