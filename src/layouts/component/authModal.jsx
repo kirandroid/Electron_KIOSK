@@ -24,7 +24,8 @@ export default class AuthModal extends React.Component {
       showPassword: false,
       changed: false,
       usernameError: false,
-      passwordError: false
+      passwordError: false,
+      loginButton: 'Login'
     };
   }
 
@@ -122,6 +123,9 @@ export default class AuthModal extends React.Component {
                 style={{ marginRight: "10px" }}
                 disabled={this.state.changed ? false : true}
                 onClick={() => {
+                  this.setState({
+                    loginButton: "LOADING"
+                  })
                   axios
                     .post(apiurl + "/api/login", {
                       STUDENT_ID: this.state.username,
@@ -156,20 +160,27 @@ export default class AuthModal extends React.Component {
                         console.log("Status 204");
                         this.setState({
                           usernameError: true,
-                          passwordError: true
+                          passwordError: true,
+                          loginButton: "ERROR"
                         });
                         <Confirm content="Incorrent Student ID or Password!" />;
                       } else {
+                        this.setState({
+                          loginButton: "ERROR"
+                        });
                         console.log("Other");
                         <Confirm content="Student ID Doesnot Exist!" />;
                       }
                     })
                     .catch(error => {
+                      this.setState({
+                        loginButton: "ERROR"
+                      });
                       console.log(error);
                     });
                 }}
               >
-                Login
+                {this.state.loginButton}
               </Button>
 
               <SignUpModal

@@ -15,16 +15,18 @@ export default class Home extends Component {
 			home_slider: [],
 			test: [
 				{
-					IMAGE: 'https://patancollege.edu.np/wp-content/uploads/2019/05/sports-day-00040.jpg'
+					IMAGE:
+						'https://pic.001all.com/Wallpaper/Desktop%20Wallpaper/Sports/FTP/1366%20x%20768/College%20basketball%20hot%20wallpapers%201366%20x%20768%20Pixels%20Resolution.jpg'
 				},
 				{
-					IMAGE: 'https://patancollege.edu.np/wp-content/uploads/2019/05/sports-day-00022.jpg'
+					IMAGE:
+						'https://patancollege.https://live-beds-uni-cdnep.azureedge.net/live-beds-uni-media/266390/breeam-thumbnail.jpg.np/wp-content/uploads/2019/05/sports-day-00022.jpg'
 				},
 				{
-					IMAGE: 'https://patancollege.edu.np/wp-content/uploads/2019/05/sports-day-00083.jpg'
+					IMAGE: 'https://patancollege.edu.np/wp-content/uploads/2018/07/image055.jpg'
 				},
 				{
-					IMAGE: 'https://patancollege.edu.np/wp-content/uploads/2018/05/IMG-20180411-WA0017.jpg'
+					IMAGE: 'https://images6.alphacoders.com/427/thumb-1920-427408.jpg'
 				},
 				{
 					IMAGE: 'https://patancollege.edu.np/wp-content/uploads/2019/04/PCPS-SW19-BB-00012.jpg'
@@ -117,21 +119,23 @@ export default class Home extends Component {
 							<Typography variant="h5" component="h2">
 								News And Notice
 							</Typography>
-							<AddNewsNoticeModal
-								trigger={
-									<Button
-										type="submit"
-										variant="contained"
-										color="primary"
-										style={{ marginRight: '10px' }}
-										onClick={() => {
-											console.log('YOYOYOY');
-										}}
-									>
-										Add Item
-									</Button>
-								}
-							/>
+							{this.props.role == 'Admin' ? (
+								<AddNewsNoticeModal
+									trigger={
+										<Button
+											type="submit"
+											variant="contained"
+											color="primary"
+											style={{ marginRight: '10px' }}
+											onClick={() => {
+												console.log('YOYOYOY');
+											}}
+										>
+											Add Item
+										</Button>
+									}
+								/>
+							) : null}
 						</Grid>
 					</div>
 					<Grid item xs={12}>

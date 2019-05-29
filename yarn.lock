@@ -3179,7 +3179,7 @@ fast-levenshtein@~2.0.4:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
 
-fbjs@^0.8.1, fbjs@^0.8.12:
+fbjs@^0.8.1, fbjs@^0.8.12, fbjs@^0.8.16:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   dependencies:
@@ -6344,7 +6344,7 @@ promzard@^0.3.0:
   dependencies:
     read "1"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   dependencies:
@@ -6572,6 +6572,24 @@ react-user-avatar@^1.10.0:
     add-px "^1.0.0"
     contrast "^1.0.1"
     initials "^2.1.5"
+
+react-validation-framework@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-validation-framework/-/react-validation-framework-5.1.0.tgz#7754ee114d69863004031c0f4e9c22610b1d08fa"
+  integrity sha512-dqXny7AdMC9yRmEm7iwG6odu6MTGhN3VQ5SQwa4HFR5n372xb4sX++Veb/S6bfN8YeuuvOZFO+88mmnDRF8LSA==
+  dependencies:
+    prop-types "^15.6.1"
+    react "16.1.1"
+
+react@16.1.1:
+  version "16.1.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.1.1.tgz#d5c4ef795507e3012282dd51261ff9c0e824fe1f"
+  integrity sha512-FQfiFfk2z2Fk87OngNJHT05KyC9DOVn8LPeB7ZX+9u5+yU1JK6o5ozRlU3PeOMr0IFkWNvgn9jU8/IhRxR1F0g==
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
 
 react@16.8.6, react@^16.2.0, react@^16.3.2:
   version "16.8.6"

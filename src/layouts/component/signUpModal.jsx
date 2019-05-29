@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Grid, Button } from 'semantic-ui-react';
+import { Modal, Grid, Button, Image } from 'semantic-ui-react';
 import {
 	TextField,
 	InputAdornment,
@@ -19,6 +19,8 @@ export default class SignUpModal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			file: '',
+			imagePreviewUrl: '',
 			username: '',
 			password: '',
 			firstname: '',
@@ -43,14 +45,41 @@ export default class SignUpModal extends React.Component {
 			passwordError: false,
 			courseError: false,
 			studylevelError: false,
-			genderError: false
+			genderError: false,
+			registerButton: 'Register'
 		};
+		this._handleImageChange = this._handleImageChange.bind(this);
 	}
 	handleClickShowPassword() {
 		this.setState({ showPassword: !this.state.showPassword });
 	}
 
+	_handleImageChange(e) {
+		e.preventDefault();
+
+		let reader = new FileReader();
+		let file = e.target.files[0];
+
+		reader.onloadend = () => {
+			this.setState({
+				file: file,
+				imagePreviewUrl: reader.result
+			});
+		};
+
+		reader.readAsDataURL(file);
+	}
+
 	render() {
+		let { imagePreviewUrl } = this.state;
+		let $imagePreview = null;
+		if (imagePreviewUrl) {
+			$imagePreview = (
+				<div>
+					<Image src={imagePreviewUrl} size="medium" rounded centered />;
+				</div>
+			);
+		}
 		return (
 			<div>
 				<Modal trigger={this.props.trigger} dimmer={'blurring'} size="small">
@@ -74,6 +103,10 @@ export default class SignUpModal extends React.Component {
 												firstname: e.target.value,
 												changed: true
 											})}
+										error={this.state.firstnameError == true ? true : false}
+										helperText={
+											this.state.firstnameError == true ? 'First name is Blank or invalid' : null
+										}
 										label="First Name"
 										margin="normal"
 										variant="outlined"
@@ -86,6 +119,10 @@ export default class SignUpModal extends React.Component {
 												lastname: e.target.value,
 												changed: true
 											})}
+										error={this.state.lastnameError == true ? true : false}
+										helperText={
+											this.state.lastnameError == true ? 'First name is Blank or invalid' : null
+										}
 										label="Last Name"
 										margin="normal"
 										variant="outlined"
@@ -100,6 +137,10 @@ export default class SignUpModal extends React.Component {
 												username: e.target.value,
 												changed: true
 											})}
+										error={this.state.usernameError == true ? true : false}
+										helperText={
+											this.state.usernameError == true ? 'Username is Blank or invalid' : null
+										}
 										label="Username"
 										margin="normal"
 										variant="outlined"
@@ -112,6 +153,8 @@ export default class SignUpModal extends React.Component {
 												email: e.target.value,
 												changed: true
 											})}
+										error={this.state.emailError == true ? true : false}
+										helperText={this.state.emailError == true ? 'Email is Blank or invalid' : null}
 										label="Email"
 										margin="normal"
 										variant="outlined"
@@ -131,6 +174,10 @@ export default class SignUpModal extends React.Component {
 												password: e.target.value,
 												changed: true
 											})}
+										error={this.state.passwordError == true ? true : false}
+										helperText={
+											this.state.passwordError == true ? 'Password is Blank or invalid' : null
+										}
 										InputProps={{
 											endAdornment: (
 												<InputAdornment position="end">
@@ -173,6 +220,12 @@ export default class SignUpModal extends React.Component {
 												contact: e.target.value,
 												changed: true
 											})}
+										error={this.state.contactError == true ? true : false}
+										helperText={
+											this.state.contactError == true ? (
+												'Contact is invalid or already used'
+											) : null
+										}
 										label="Contact"
 										margin="normal"
 										variant="outlined"
@@ -181,12 +234,19 @@ export default class SignUpModal extends React.Component {
 								<Grid.Column>
 									<TextField
 										select
+										value={this.state.study_level}
 										label="Study Level"
 										onChange={(e) =>
 											this.setState({
 												study_level: e.target.value,
 												changed: true
 											})}
+										error={this.state.study_level == true ? true : false}
+										helperText={
+											this.state.study_level == true ? (
+												'Study Level is invalid or already used'
+											) : null
+										}
 										SelectProps={{
 											native: true
 										}}
@@ -211,11 +271,16 @@ export default class SignUpModal extends React.Component {
 									<TextField
 										select
 										label="Course"
+										value={this.state.course}
 										onChange={(e) =>
 											this.setState({
 												course: e.target.value,
 												changed: true
 											})}
+										error={this.state.course == true ? true : false}
+										helperText={
+											this.state.course == true ? 'Course is invalid or already used' : null
+										}
 										SelectProps={{
 											native: true
 										}}
@@ -235,17 +300,30 @@ export default class SignUpModal extends React.Component {
 									<RadioGroup
 										aria-label="Gender"
 										name="gender"
+										value={this.state.gender}
 										onChange={(e) =>
 											this.setState({
 												gender: e.target.value,
 												changed: true
 											})}
+										error={this.state.genderError == true ? true : false}
+										helperText={
+											this.state.genderError == true ? 'Gender is invalid or already used' : null
+										}
 										row
 									>
 										<FormControlLabel value="female" control={<Radio />} label="Female" />
 										<FormControlLabel value="male" control={<Radio />} label="Male" />
 										<FormControlLabel value="other" control={<Radio />} label="Other" />
 									</RadioGroup>
+								</Grid.Column>
+								<Grid.Column>
+									<div>
+										<form>
+											<input type="file" onChange={this._handleImageChange} />
+										</form>
+										{$imagePreview}
+									</div>
 								</Grid.Column>
 							</Grid.Row>
 						</Grid>
@@ -258,7 +336,7 @@ export default class SignUpModal extends React.Component {
 							}}
 						>
 							<Button
-								content="Register"
+								content={this.state.registerButton}
 								primary
 								disabled={this.state.changed ? false : true}
 								onClick={() => {
@@ -309,6 +387,7 @@ export default class SignUpModal extends React.Component {
 													});
 												} else {
 													this.setState({
+														registerButton: 'ERROR',
 														usernameError: false,
 														passwordError: false,
 														firstnameError: false,
@@ -322,27 +401,39 @@ export default class SignUpModal extends React.Component {
 														genderError: false
 													});
 
-													axios
-														.post(apiurl + '/api/register', {
-															FIRST_NAME: this.state.firstname,
-															LAST_NAME: this.state.lastname,
-															USERNAME: this.state.username,
-															PASSWORD: this.state.password,
-															EMAIL: this.state.email,
-															STUDENT_ID: this.state.studentId,
-															GENDER: this.state.gender,
-															CONTACT: this.state.contact,
-															COURSE: this.state.course,
-															STUDY_LEVEL: this.state.study_level,
-															ROLE: 'Student',
-															CREATED_AT: Date.now(),
-															UPDATED_AT: Date.now()
-														})
+													var bodyFormData = new FormData();
+													bodyFormData.append('FIRST_NAME', this.state.firstname);
+													bodyFormData.append('LAST_NAME', this.state.lastname);
+													bodyFormData.append('USERNAME', this.state.username);
+													bodyFormData.append('PASSWORD', this.state.password);
+													bodyFormData.append('EMAIL', this.state.email);
+													bodyFormData.append('imageFile', this.state.file);
+													bodyFormData.append('STUDENT_ID', this.state.studentId);
+													bodyFormData.append('GENDER', this.state.gender);
+													bodyFormData.append('CONTACT', this.state.contact);
+													bodyFormData.append('COURSE', this.state.course);
+													bodyFormData.append('STUDY_LEVEL', this.state.study_level);
+													bodyFormData.append('ROLE', 'Student');
+													bodyFormData.append('CREATED_AT', Date.now());
+													bodyFormData.append('UPDATED_AT', Date.now());
+
+													axios({
+														method: 'post',
+														url: apiurl + '/api/register',
+														data: bodyFormData,
+														config: { headers: { 'Content-Type': 'multipart/form-data' } }
+													})
 														.then((response) => {
+															this.setState({
+																registerButton: 'LOADING'
+															});
 															console.log(response);
 														})
-														.catch((error) => {
-															console.log(error);
+														.catch((response) => {
+															this.setState({
+																registerButton: 'ERROR'
+															});
+															console.log(response);
 														});
 												}
 												this.setState({
@@ -356,30 +447,10 @@ export default class SignUpModal extends React.Component {
 										})
 										.catch((error) => {
 											console.log(error);
+											this.setState({
+												registerButton: 'ERROR'
+											});
 										});
-
-									// axios
-									// 	.post(apiurl + '/api/register', {
-									// 		FIRST_NAME: this.state.firstname,
-									// 		LAST_NAME: this.state.lastname,
-									// 		USERNAME: this.state.username,
-									// 		PASSWORD: this.state.password,
-									// 		EMAIL: this.state.email,
-									// 		STUDENT_ID: this.state.studentId,
-									// 		GENDER: this.state.gender,
-									// 		CONTACT: this.state.contact,
-									// 		COURSE: this.state.course,
-									// 		STUDY_LEVEL: this.state.study_level,
-									// 		ROLE: 'Student',
-									// 		CREATED_AT: Date.now(),
-									// 		UPDATED_AT: Date.now()
-									// 	})
-									// 	.then((response) => {
-									// 		console.log(response);
-									// 	})
-									// 	.catch((error) => {
-									// 		console.log(error);
-									// 	});
 								}}
 							/>
 						</div>

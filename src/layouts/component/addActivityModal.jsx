@@ -33,7 +33,12 @@ export default class AddActivityModal extends React.Component {
 			activityImage: '',
 			activityType: '',
 			file: '',
-			imagePreviewUrl: ''
+			imagePreviewUrl: '',
+			activityDescriptionError: false,
+			activityNameError: false,
+			activityImageError: false,
+			activityTypeError: false,
+			fileError: false
 		};
 		this._handleImageChange = this._handleImageChange.bind(this);
 	}
@@ -87,6 +92,12 @@ export default class AddActivityModal extends React.Component {
 												activityName: e.target.value,
 												changed: true
 											})}
+										error={this.state.activityNameError == true ? true : false}
+										helperText={
+											this.state.activityNameError == true ? (
+												'Activity Name is invalid or already used'
+											) : null
+										}
 										label="Activity Name"
 										margin="normal"
 										variant="outlined"
@@ -99,6 +110,12 @@ export default class AddActivityModal extends React.Component {
 												activityDescription: e.target.value,
 												changed: true
 											})}
+										error={this.state.activityDescriptionError == true ? true : false}
+										helperText={
+											this.state.activityDescriptionError == true ? (
+												'Description is invalid or already used'
+											) : null
+										}
 										multiline
 										rowsMax="4"
 										label="Activity Description"
@@ -115,6 +132,12 @@ export default class AddActivityModal extends React.Component {
 												activityType: e.target.value,
 												changed: true
 											})}
+										error={this.state.activityTypeError == true ? true : false}
+										helperText={
+											this.state.activityTypeError == true ? (
+												'Type is invalid or already used'
+											) : null
+										}
 										row
 									>
 										<FormControlLabel value="SPORTS" control={<Radio />} label="Sports" />
@@ -145,24 +168,72 @@ export default class AddActivityModal extends React.Component {
 								primary
 								disabled={this.state.changed ? false : true}
 								onClick={() => {
-									var bodyFormData = new FormData();
-									bodyFormData.append('imageFile', this.state.file);
-									bodyFormData.append('ACT_NAME', this.state.activityName);
-									bodyFormData.append('ACT_DESCRIPTION', this.state.activityDescription);
-									bodyFormData.append('ACT_TYPE', this.state.activityType);
-
-									axios({
-										method: 'post',
-										url: apiurl + '/api/addactivity',
-										data: bodyFormData,
-										config: { headers: { 'Content-Type': 'multipart/form-data' } }
-									})
-										.then(function(response) {
-											console.log(response);
-										})
-										.catch(function(response) {
-											console.log(response);
+									if (this.state.activityDescription == '') {
+										this.setState({
+											activityDescriptionError: true
 										});
+									} else {
+										this.setState({
+											activityDescriptionError: false
+										});
+									}
+									if (this.state.activityName == '') {
+										this.setState({
+											activityNameError: true
+										});
+									} else {
+										this.setState({
+											activityNameError: false
+										});
+									}
+									if (this.state.activityType == '') {
+										this.setState({
+											activityTypeError: true
+										});
+									} else {
+										this.setState({
+											activityTypeError: false
+										});
+									}
+									if (this.state.file == '') {
+										this.setState({
+											fileError: true
+										});
+										alert('Image file Empty');
+									} else {
+										this.setState({
+											fileError: false
+										});
+									}
+
+									if (
+										this.state.activityDescriptionError == false &&
+										this.state.activityNameError == false &&
+										this.state.activityTypeError == false &&
+										this.state.fileError == false
+									) {
+										var bodyFormData = new FormData();
+										bodyFormData.append('imageFile', this.state.file);
+										bodyFormData.append('ACT_NAME', this.state.activityName);
+										bodyFormData.append('ACT_DESCRIPTION', this.state.activityDescription);
+										bodyFormData.append('ACT_TYPE', this.state.activityType);
+
+										axios({
+											method: 'post',
+											url: apiurl + '/api/addactivity',
+											data: bodyFormData,
+											config: { headers: { 'Content-Type': 'multipart/form-data' } }
+										})
+											.then(function(response) {
+												alert('Success!');
+												console.log(response);
+											})
+											.catch(function(response) {
+												console.log(response);
+											});
+									} else {
+										alert('Something went wrong!');
+									}
 								}}
 							/>
 						</div>

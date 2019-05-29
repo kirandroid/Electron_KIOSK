@@ -17,6 +17,7 @@ import UserAvatar from 'react-user-avatar';
 import { Dropdown, Image } from 'semantic-ui-react';
 import LoadingModal from '../component/loadingModal';
 import AuthModal from '../component/authModal';
+import SearchModal from '../component/searchModal';
 
 import Pouchdb from 'pouchdb-browser';
 var userdb = Pouchdb('user');
@@ -48,23 +49,45 @@ const style = {
 };
 
 export default class Header extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			title: ''
+		};
+	}
 	render() {
 		return (
 			<div>
 				<AppBar position="static" color="#fff" style={{ elevation: 0 }}>
 					<Toolbar>
 						<Grid container direction="row" justify="space-between" alignItems="center">
-							<Typography variant="h6" color="inherit" style={style.logo}>
+							{/* <Typography variant="h6" color="inherit" style={style.logo}>
 								KIOSK
-							</Typography>
+							</Typography> */}
+							<div>
+								<Image
+									src="https://lh3.googleusercontent.com/1_Hzer-EW36Y0gfOdhpWwIgyusDEcFocH3f4GWiFJaPxCqrZl3x4udSZFf8nXgOb425fvA96eEt0AgyE5bo9vA=s0"
+									size="small"
+									centered
+								/>
+							</div>
 							<Paper style={style.root} elevation={1}>
 								<InputBase
+									onChange={(e) =>
+										this.setState({
+											title: e.target.value
+										})}
 									style={style.input}
 									placeholder="Search for some awesome Events and Programmes!!"
 								/>
-								<IconButton style={style.iconButton} aria-label="Search">
-									<Search />
-								</IconButton>
+								<SearchModal
+									searchTitle={this.state.title}
+									trigger={
+										<IconButton style={style.iconButton} aria-label="Search" onClick={() => {}}>
+											<Search />
+										</IconButton>
+									}
+								/>
 							</Paper>
 
 							<Dropdown

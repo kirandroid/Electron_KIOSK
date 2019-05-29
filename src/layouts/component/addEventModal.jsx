@@ -45,7 +45,8 @@ export default class AddEventModal extends React.Component {
       eventStatus: "",
       eventEndDate: Date.now(),
       file: "",
-      imagePreviewUrl: ""
+      imagePreviewUrl: "",
+      eventButton: "Add Event"
     };
     this._handleImageChange = this._handleImageChange.bind(this);
   }
@@ -218,7 +219,7 @@ export default class AddEventModal extends React.Component {
             }}
           >
             <Button
-              content="Add Event"
+              content={this.state.eventButton}
               primary
               onClick={() => {
                 var bodyFormData = new FormData();
@@ -240,11 +241,15 @@ export default class AddEventModal extends React.Component {
                   data: bodyFormData,
                   config: { headers: { "Content-Type": "multipart/form-data" } }
                 })
-                  .then(function(response) {
-                    console.log(response);
+                  .then(res => {
+                    this.setState({
+                      eventButton : "LOADING"
+                    })
                   })
-                  .catch(function(response) {
-                    console.log(response);
+                  .catch(res => {
+                    this.setState({
+                      eventButton : "ERROR"
+                    })
                   });
               }}
             />

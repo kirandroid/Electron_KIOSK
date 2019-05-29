@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import NoticeModal from '../component/noticeModal';
 import moment from 'moment';
+import LinesEllipsis from 'react-lines-ellipsis';
 
 export default ({ title, desc, created, type, onClick }) => (
 	<Card
@@ -30,7 +31,7 @@ export default ({ title, desc, created, type, onClick }) => (
 				{moment(created).fromNow()}
 			</Typography>
 			<Typography variant="body2" component="p">
-				{desc}
+				<LinesEllipsis text={desc} maxLine="4" ellipsis="..." trimRight basedOn="letters" />
 			</Typography>
 		</CardContent>
 		<CardActions>

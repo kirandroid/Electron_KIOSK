@@ -82,7 +82,7 @@ export default class App extends React.Component {
 		const adminPanes = [
 			{
 				menuItem: 'Home',
-				render: () => <Home />
+				render: () => <Home role={this.state.role} />
 			},
 			{ menuItem: 'Event', render: () => <Event role={this.state.role} /> },
 			{ menuItem: 'All Bookings', render: () => <Booking role={this.state.role} /> },
@@ -94,7 +94,7 @@ export default class App extends React.Component {
 		const user = [
 			{
 				menuItem: 'Home',
-				render: () => <Home />
+				render: () => <Home role={this.state.role} />
 			},
 			{ menuItem: 'Event', render: () => <Event role={this.state.role} userId={this.state.userId} /> },
 			{ menuItem: 'My Bookings', render: () => <Booking role={this.state.role} userId={this.state.userId} /> },
@@ -127,7 +127,7 @@ export default class App extends React.Component {
 		const guest = [
 			{
 				menuItem: 'Home',
-				render: () => <Home />
+				render: () => <Home role={this.state.role} />
 			},
 			{ menuItem: 'Event', render: () => <Event role={this.state.role} /> },
 			{ menuItem: 'Activities', render: () => <Activities role={this.state.role} /> },
