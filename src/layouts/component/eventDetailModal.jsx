@@ -18,7 +18,11 @@ import {
 	Sync,
 	Check,
 	Layers,
-	Book
+	Book,
+	Category,
+	DateRange,
+	Update,
+	EventSeat
 } from '@material-ui/icons';
 import { apiurl } from '../../store/data';
 
@@ -33,7 +37,7 @@ export default class EventDetailModal extends React.Component {
 	render() {
 		return (
 			<div>
-				<Modal trigger={this.props.trigger} dimmer={'blurring'} size="large">
+				<Modal trigger={this.props.trigger} dimmer={'blurring'} size="small">
 					<Modal.Header>
 						<div
 							style={{
@@ -83,21 +87,21 @@ export default class EventDetailModal extends React.Component {
 															<PermIdentity />
 														</Avatar>
 													</ListItemAvatar>
-													<ListItemText
-														primary="Total Seat"
-														secondary={this.props.totalSeat}
-													/>
+													<ListItemText primary="Event ID" secondary={this.props.eventId} />
 												</ListItem>
+
 												<Divider variant="inset" component="li" />
 												<ListItem>
 													<ListItemAvatar>
 														<Avatar>
-															<AccountCircle />
+															<DateRange />
 														</Avatar>
 													</ListItemAvatar>
 													<ListItemText
-														primary="Event Type"
-														secondary={this.props.eventType}
+														primary="Event Start Date"
+														secondary={Moment(this.props.eventStartDate).format(
+															'YYYY-MM-DD'
+														)}
 													/>
 												</ListItem>
 												<Divider variant="inset" component="li" />
@@ -116,19 +120,13 @@ export default class EventDetailModal extends React.Component {
 												<ListItem>
 													<ListItemAvatar>
 														<Avatar>
-															<Email />
+															<EventSeat />
 														</Avatar>
 													</ListItemAvatar>
-													<ListItemText primary="Seat Left" secondary={this.props.seatLeft} />
-												</ListItem>
-												<Divider variant="inset" component="li" />
-												<ListItem>
-													<ListItemAvatar>
-														<Avatar>
-															<Layers />
-														</Avatar>
-													</ListItemAvatar>
-													<ListItemText primary="Event ID" secondary={this.props.eventId} />
+													<ListItemText
+														primary="Total Seat"
+														secondary={this.props.totalSeat}
+													/>
 												</ListItem>
 											</List>
 										</Paper>
@@ -139,42 +137,12 @@ export default class EventDetailModal extends React.Component {
 												<ListItem>
 													<ListItemAvatar>
 														<Avatar>
-															<Book />
+															<Category />
 														</Avatar>
 													</ListItemAvatar>
 													<ListItemText
-														primary="Event Start Date"
-														secondary={Moment(this.props.eventStartDate).format(
-															'YYYY-MM-DD'
-														)}
-													/>
-												</ListItem>
-												<Divider variant="inset" component="li" />
-												<ListItem>
-													<ListItemAvatar>
-														<Avatar>
-															<Phone />
-														</Avatar>
-													</ListItemAvatar>
-													<ListItemText
-														primary="Event End Date"
-														secondary={Moment(this.props.eventEndDate).format('YYYY-MM-DD')}
-													/>
-												</ListItem>
-												<Divider variant="inset" component="li" />
-												<ListItem>
-													<ListItemAvatar>
-														<Avatar>
-															<Check />
-														</Avatar>
-													</ListItemAvatar>
-													<ListItemText
-														primary="Created At"
-														secondary={
-															Moment(this.props.createdAt).format('YYYY-MM-DD') +
-															' --- ' +
-															Moment(this.props.createdAt).fromNow()
-														}
+														primary="Event Type"
+														secondary={this.props.eventType}
 													/>
 												</ListItem>
 
@@ -182,7 +150,20 @@ export default class EventDetailModal extends React.Component {
 												<ListItem>
 													<ListItemAvatar>
 														<Avatar>
-															<Sync />
+															<DateRange />
+														</Avatar>
+													</ListItemAvatar>
+													<ListItemText
+														primary="Event End Date"
+														secondary={Moment(this.props.eventEndDate).format('YYYY-MM-DD')}
+													/>
+												</ListItem>
+
+												<Divider variant="inset" component="li" />
+												<ListItem>
+													<ListItemAvatar>
+														<Avatar>
+															<Update />
 														</Avatar>
 													</ListItemAvatar>
 													<ListItemText
@@ -193,6 +174,16 @@ export default class EventDetailModal extends React.Component {
 															Moment(this.props.updatedAt).fromNow()
 														}
 													/>
+												</ListItem>
+
+												<Divider variant="inset" component="li" />
+												<ListItem>
+													<ListItemAvatar>
+														<Avatar>
+															<EventSeat />
+														</Avatar>
+													</ListItemAvatar>
+													<ListItemText primary="Seat Left" secondary={this.props.seatLeft} />
 												</ListItem>
 											</List>
 										</Paper>
