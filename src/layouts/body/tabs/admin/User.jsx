@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import { users } from "../../../../store/data";
 import UserCard from '../../../component/userCard';
-import { Grid, Paper, CircularProgress } from '@material-ui/core';
+import { Grid, Paper, CircularProgress, Button } from '@material-ui/core';
 import { apiurl } from '../../../../store/data';
+import AddStudentIDModal from '../../../component/AddStudentIDModal';
 
 export default class User extends Component {
 	constructor(props) {
@@ -23,6 +23,23 @@ export default class User extends Component {
 	render() {
 		return (
 			<div style={{ flexGrow: 1, padding: 10 }}>
+				{this.props.role == 'Admin' ? (
+					<AddStudentIDModal
+						trigger={
+							<Button
+								type="submit"
+								variant="contained"
+								color="primary"
+								style={{ marginRight: '10px' }}
+								onClick={() => {
+									console.log('YOYOYOY');
+								}}
+							>
+								Add Student ID
+							</Button>
+						}
+					/>
+				) : null}
 				<Grid container>
 					{this.state.users.map((user) => (
 						<Grid item xs={3} style={{ padding: 5 }} key={user.ID}>

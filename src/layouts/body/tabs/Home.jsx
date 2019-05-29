@@ -19,10 +19,6 @@ export default class Home extends Component {
 						'https://pic.001all.com/Wallpaper/Desktop%20Wallpaper/Sports/FTP/1366%20x%20768/College%20basketball%20hot%20wallpapers%201366%20x%20768%20Pixels%20Resolution.jpg'
 				},
 				{
-					IMAGE:
-						'https://patancollege.https://live-beds-uni-cdnep.azureedge.net/live-beds-uni-media/266390/breeam-thumbnail.jpg.np/wp-content/uploads/2019/05/sports-day-00022.jpg'
-				},
-				{
 					IMAGE: 'https://patancollege.edu.np/wp-content/uploads/2018/07/image055.jpg'
 				},
 				{
@@ -36,34 +32,15 @@ export default class Home extends Component {
 				},
 				{
 					IMAGE: 'https://patancollege.edu.np/wp-content/uploads/2018/12/image00007.jpeg'
+				},
+				{
+					IMAGE:
+						'https://images.unsplash.com/photo-1474650919751-b7e21a1b180f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&q=80'
 				}
 			]
 		};
 		this.fetchData();
 	}
-
-	// componentWillReceiveProps(newprops) {
-	// 	if (newprops) {
-	// 		this.fetchData();
-	// 		console.log('Fetched');
-	// 	} else {
-	// 		console.log('Not');
-	// 	}
-	// }
-
-	// componentDidMount() {
-	// this.fetchData();
-	// 	axios
-	// 		.get(apiurl + `/api/newsnotice`)
-	// 		.then((res) => {
-	// 			const newsNotices = res.data;
-	// 			console.log(res.data);
-	// 			this.setState({ newsNotices });
-	// 		})
-	// 		.catch((err) => {
-	// 			console.log(err);
-	// 		});
-	// }
 
 	fetchData() {
 		axios.get(apiurl + `/api/newsnotice`).then((res) => {
@@ -96,22 +73,12 @@ export default class Home extends Component {
 										flex: 1,
 										width: null,
 										height: 400,
-										objectFit: 'cover'
+										objectFit: 'cover',
+										paddingRight: 10
 									}}
 									src={slider.IMAGE}
 								/>
 							))}
-							{/* {this.state.home_slider.map((slider_img) => (
-								<img
-									style={{
-										flex: 1,
-										width: 1000,
-										height: 300,
-										objectFit: 'cover'
-									}}
-									src={slider_img.IMAGE}
-								/>
-							))} */}
 						</Flickity>
 					</Grid>
 					<div style={{ padding: 10 }}>

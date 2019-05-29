@@ -7,6 +7,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import AuthModal from '../component/authModal';
 import {
 	AccountCircle,
 	PermIdentity,
@@ -207,39 +208,45 @@ export default class EventDetailModal extends React.Component {
 								justifyContent: 'center'
 							}}
 						>
-							<Button
-								content={this.state.isBooked == true ? 'Booked' : 'Book'}
-								primary
-								disabled={this.state.isBooked == true ? true : false}
-								onClick={() => {
-									axios
-										.post(apiurl + '/api/bookevent', {
-											BOOK_DATE: Date.now(),
-											EVENT_ID: this.props.eventId,
-											USER_ID: this.props.userId
-										})
-										.then((response) => {
-											console.log(response);
-											axios
-												.put(apiurl + '/api/updateSeat', {
-													SEAT_LEFT: this.props.seatLeft,
-													EVENT_ID: this.props.eventId
-												})
-												.then((response) => {
-													console.log(response);
-												})
-												.catch((error) => {
-													console.log(error);
-												});
-										})
-										.catch((error) => {
-											console.log(error);
+							{this.props.role == 'Guest' ? (
+								<AuthModal trigger={<Button content="Book" primary onClick={() => {}} />} />
+							) : this.props.role == 'Admin' ? (
+								<Button content="You are Admin" primary onClick={() => {}} />
+							) : (
+								<Button
+									content={this.state.isBooked == true ? 'Booked' : 'Book'}
+									primary
+									disabled={this.state.isBooked == true ? true : false}
+									onClick={() => {
+										axios
+											.post(apiurl + '/api/bookevent', {
+												BOOK_DATE: Date.now(),
+												EVENT_ID: this.props.eventId,
+												USER_ID: this.props.userId
+											})
+											.then((response) => {
+												console.log(response);
+												axios
+													.put(apiurl + '/api/updateSeat', {
+														SEAT_LEFT: this.props.seatLeft,
+														EVENT_ID: this.props.eventId
+													})
+													.then((response) => {
+														console.log(response);
+													})
+													.catch((error) => {
+														console.log(error);
+													});
+											})
+											.catch((error) => {
+												console.log(error);
+											});
+										this.setState({
+											isBooked: true
 										});
-									this.setState({
-										isBooked: true
-									});
-								}}
-							/>
+									}}
+								/>
+							)}
 						</div>
 					</Modal.Actions>
 				</Modal>

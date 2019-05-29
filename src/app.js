@@ -88,7 +88,7 @@ export default class App extends React.Component {
 			{ menuItem: 'All Bookings', render: () => <Booking role={this.state.role} /> },
 			{ menuItem: 'Activities', render: () => <Activities role={this.state.role} /> },
 			{ menuItem: 'Services', render: () => <Services role={this.state.role} /> },
-			{ menuItem: 'User', render: () => <User /> }
+			{ menuItem: 'User', render: () => <User role={this.state.role} /> }
 		];
 
 		const user = [
