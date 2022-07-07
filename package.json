@@ -59,7 +59,7 @@
     "electron-devtools-installer": "^2.1.0",
     "electron-squirrel-startup": "^1.0.0",
     "flickity": "^2.2.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "npm": "^6.9.0",
     "pouchdb-browser": "^7.0.0",
     "react": "16.8.6",
